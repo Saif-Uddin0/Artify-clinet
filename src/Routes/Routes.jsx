@@ -12,7 +12,23 @@ export const router = createBrowserRouter([
         {
             index: true,
             element:<Home></Home>
-        }
+        },
+        {
+            path: '/explore-art',
+            element: <h1>Explore art</h1>
+        },
+        {
+            path: '/add-art',
+            element: <h1>Add Art</h1>
+        },
+        {
+            path: '/my-gallery',
+            element: <h1>My Gallery</h1>
+        },
+        {
+            path: '/my-favorite',
+            element: <h1>My favourite</h1>
+        },
     ]
   },
 ]);
