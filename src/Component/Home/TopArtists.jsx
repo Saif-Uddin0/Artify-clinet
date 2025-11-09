@@ -17,7 +17,7 @@ const TopArtists = () => {
   return (
     <section className="py-12 bg-gray-50">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-indigo-600 mb-6 text-center flex justify-center items-center gap-3 v">
+        <h2 className="text-3xl font-bold text-indigo-600 mb-6 text-center flex justify-center items-center gap-2 v">
           <FaStar className="text-orange-400"></FaStar> Top Artists of the Week
         </h2>
 

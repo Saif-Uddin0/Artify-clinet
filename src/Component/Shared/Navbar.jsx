@@ -93,7 +93,7 @@ const Navbar = () => {
     // }
 
     return (
-        <div className='bg-gradient-to-r from-gray-50 to-gray-100 w-full'>
+        <div className='bg-gradient-to-r from-gray-50 to-gray-100 w-full border-b border-gray-100'>
             <div className="navbar container md:w-11/12 mx-auto">
                 <div className=" navbar-start ">
                     <div className="dropdown">
@@ -116,7 +116,7 @@ const Navbar = () => {
 
                 </div>
                 <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1 flex gap-5 font-medium text-gray-600">
+                    <ul className="menu menu-horizontal px-1 flex gap-5 font-medium text-gray-800">
                         {navLinks}
                     </ul>
                 </div>

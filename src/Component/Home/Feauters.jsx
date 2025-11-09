@@ -50,7 +50,7 @@ const FeaturedArtworks = () => {
 
                 <div className="mt-4">
                   <Link
-                    to={`/artwork/${art._id}`}
+                    to={`/artwork-details/${art._id}`}
                     className="btn  btn-st hover:transition-transform hover:scale-x-105 duration-300 w-full text-center text-gray-500"
                   >
                     View Details<ArrowRight  />

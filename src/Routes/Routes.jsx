@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router";
 import Root from "../Layout/Root";
 import Home from "../Pages/Home";
 import ErrorPage from "../Pages/ErrorPage";
+import ArtworkDetails from "../Component/ArtworkDetails";
 
 
 
@@ -31,6 +32,11 @@ export const router = createBrowserRouter([
             path: '/my-favorite',
             element: <h1>My favourite</h1>
         },
+        {
+            path: '/artwork-details/:id',
+            element: <ArtworkDetails></ArtworkDetails>,
+            loader: ({params})=> fetch(`http://localhost:3000/artwork-details/${params.id}`),
+        }
     ]
   },
 ]);
