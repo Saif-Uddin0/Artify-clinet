@@ -93,8 +93,8 @@ const Navbar = () => {
     // }
 
     return (
-        <div className='bg-gray-50 w-full shadow-sm'>
-            <div className="navbar md:w-11/12  md:mx-auto">
+        <div className='bg-gradient-to-r from-gray-50 to-gray-100 w-full'>
+            <div className="navbar container md:w-11/12 mx-auto">
                 <div className=" navbar-start ">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn flex items-center justify-center btn-ghost lg:hidden text-indigo-500">
@@ -124,7 +124,7 @@ const Navbar = () => {
 
 
                     {/* <button className="btn btn-primary text-white">Logout</button> : <ul className='flex items-center justify-center gap-1'> */}
-                    <Link to={'/auth/login'} className="btn bg-white text-purple-500 border border-purple-500 ">Login</Link>
+                    <Link to={'/auth/login'} className="btn bg-white text-st border border-purple-500 ">Login</Link>
                     <Link to={'/auth/register'} className="btn btn-st text-white">Register</Link>
                     {/* </ul> */}
 
