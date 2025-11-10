@@ -1,9 +1,78 @@
-import React from "react";
+import React, { use } from "react";
 import { Link } from "react-router";
 import { motion } from "framer-motion";
 import { FaEnvelope, FaLock } from "react-icons/fa";
+import { AuthContext } from "../Provider/AuthContext";
+import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
+    const { googlsignInWithGoogle, signInUser, setUser } = use(AuthContext)
+
+    const handleGoogleSignIn = () => {
+        googlsignInWithGoogle()
+            .then((result) => {
+                const loggedUser = result.user;
+                setUser(loggedUser);
+                console.log(loggedUser);
+
+                // toast.success("Logged in with Google");
+                // navigate("/", { replace: true });
+            })
+            .catch((error) => {
+                // toast.error(error.message);
+                console.log(error);
+
+            });
+    };
+
+
+    const handleLogin = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        // console.log(email, password);
+        signInUser(email, password)
+            .then((res) => {
+                const UserIn = res.user
+                console.log(UserIn);
+
+                // toast.success('Log in successfully')
+                e.target.reset();
+                // console.log(UserIn);
+                // navigate(`${location.state ? location.state : '/'}`);
+
+            })
+            .catch(error => {
+                // toast.error("Invalid Email or Password")
+                console.log(error);
+
+                // seTError(error.message)
+            })
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     return (
         <section className="min-h-screen flex items-center justify-center ">
             <motion.div
@@ -20,42 +89,43 @@ const Login = () => {
                     Login to continue exploring artworks
                 </p>
 
-                {/* Login Form */}
-                <form className="space-y-5">
-          <div className="flex flex-col">
-                    <label className="text-sm font-medium text-gray-700 mb-1">
-                        Email Address
-                    </label>
-                    <div className="relative">
-                        <FaEnvelope className="absolute left-3 top-3 text-gray-400" />
-                        <input
-                            required
-                            name="email"
-                            type="email"
-                            placeholder="Enter your email"
-                            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/70"
-                        />
-                    </div>
-                </div>
-
-                {/* Password */}
-                <div className="flex flex-col">
-                    <label className="text-sm font-medium text-gray-700 mb-1">
-                        Password
-                    </label>
-                    <div className="relative">
-                        <FaLock className="absolute left-3 top-3 text-gray-400" />
-                        <input
-                            required
-                            name="password"
-                            type='password'
-                            placeholder="Enter your password"
-                            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/70"
-                        />
-                    </div>
+                {/* Form */}
+                <form onSubmit={handleLogin} className="space-y-5">
+                    <div className="flex flex-col">
+                        {/* Emial */}
+                        <label className="text-sm font-medium text-gray-700 mb-1">
+                            Email Address
+                        </label>
+                        <div className="relative">
+                            <FaEnvelope className="absolute left-3 top-3 text-gray-400" />
+                            <input
+                                required
+                                name="email"
+                                type="email"
+                                placeholder="Enter your email"
+                                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/70"
+                            />
+                        </div>
                     </div>
 
-                    {/* Forgot Password */}
+                    {/* password */}
+                    <div className="flex flex-col">
+                        <label className="text-sm font-medium text-gray-700 mb-1">
+                            Password
+                        </label>
+                        <div className="relative">
+                            <FaLock className="absolute left-3 top-3 text-gray-400" />
+                            <input
+                                required
+                                name="password"
+                                type='password'
+                                placeholder="Enter your password"
+                                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/70"
+                            />
+                        </div>
+                    </div>
+
+                    {/* forgot password */}
                     <div className="text-left">
                         <a
                             className="text-sm text-indigo-500 hover:text-indigo-700 transition-all"
@@ -64,7 +134,7 @@ const Login = () => {
                         </a>
                     </div>
 
-                    {/* Login Button */}
+                    {/* Login Btn */}
                     <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
@@ -75,17 +145,25 @@ const Login = () => {
                     </motion.button>
                 </form>
 
-                {/* Divider */}
-                <div className="divider my-6 text-gray-400">OR</div>
+                <div className="divider my-4 text-gray-400">OR</div>
+
+                {/* <!-- Google --> */}
+                <button
+                        onClick={handleGoogleSignIn}
+                        className="flex items-center justify-center gap-2 w-full py-2 border rounded-md bg-white hover:bg-gray-100 transition"
+                    >
+                        <FcGoogle size={22} />
+                        <span className="text-gray-700 font-medium">Continue with Google</span>
+                    </button>
 
                 {/* Register Link */}
-                <p className="text-center text-sm text-gray-600 ">
-                   <span className="italic"> Don’t have an account?{"  "}</span>
+                <p className="text-center mt-4 text-sm text-gray-600 ">
+                    <span className="italic"> Don’t have an account?{"  "}</span>
                     <Link
                         to="/auth/register"
                         className="text-st hover:text-indigo-800 font-medium transition-colors duration-300"
                     >
-                         Register here
+                        Register here
                     </Link>
                 </p>
             </motion.div>

@@ -1,11 +1,37 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { Link } from "react-router";
 import { motion } from "framer-motion";
 import { FaUser, FaEnvelope, FaImage, FaLock } from "react-icons/fa";
+import { AuthContext } from "../Provider/AuthContext";
+import { FcGoogle } from "react-icons/fc";
 
 const Register = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
+
+
+  // google signIn
+  const { googlsignInWithGoogle, setUser } = use(AuthContext)
+
+  const handleGoogleSignIn = () => {
+    googlsignInWithGoogle()
+      .then((result) => {
+        const loggedUser = result.user;
+        setUser(loggedUser);
+        console.log(loggedUser);
+
+        // toast.success("Logged in with Google");
+        // navigate("/", { replace: true });
+      })
+      .catch((error) => {
+        // toast.error(error.message);
+        console.log(error);
+
+      });
+  };
+
+
 
   const validatePassword = (value) => {
     setPassword(value);
@@ -95,9 +121,8 @@ const Register = () => {
                 placeholder="Enter your password"
                 value={password}
                 onChange={(e) => validatePassword(e.target.value)}
-                className={`w-full pl-10 pr-4 py-2 border rounded-xl focus:outline-none focus:ring-2 ${
-                  error ? "border-red-400 focus:ring-red-300" : "border-gray-300 focus:ring-indigo-400"
-                } bg-white/70 transition-all`}
+                className={`w-full pl-10 pr-4 py-2 border rounded-xl focus:outline-none focus:ring-2 ${error ? "border-red-400 focus:ring-red-300" : "border-gray-300 focus:ring-indigo-400"
+                  } bg-white/70 transition-all`}
               />
             </div>
             {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
@@ -115,10 +140,17 @@ const Register = () => {
         </form>
 
         {/* Divider */}
-        <div className="divider my-6 text-gray-400">OR</div>
+        <div className="divider my-4 text-gray-400">OR</div>
+        <button
+          onClick={handleGoogleSignIn}
+          className="flex items-center justify-center gap-2 w-full py-2 border rounded-xl bg-white hover:bg-gray-100 transition"
+        >
+          <FcGoogle></FcGoogle>
+          <span className="text-gray-700 font-medium">Sign up with Google</span>
+        </button>
 
         {/* Login Link */}
-        <p className="text-center text-sm text-gray-600">
+        <p className="text-center mt-4 text-sm text-gray-600">
           <span className="italic">Already have an account?{"  "}</span>
           <Link
             to="/auth/login"

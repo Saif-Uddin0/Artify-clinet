@@ -13,7 +13,7 @@ const FeaturedArtworks = () => {
     }, []);
 
     return (
-        <div className="bg-gray-50 py-16">
+        <div className=" py-16">
             <div className="container mx-auto px-6">
                 <h2 className="text-3xl md:text-4xl font-bold text-indigo-600 mb-12 text-center">
                     Featured Artworks

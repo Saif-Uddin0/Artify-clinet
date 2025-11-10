@@ -38,7 +38,7 @@ const ArtworkDetails = () => {
 
     return (
         <section className="py-12  min-h-screen mt-20">
-            <div className="container mx-auto px-5 py-12 grid md:grid-cols-2 gap-10 items-center justify-center rounded-xl border-t border-b  border-gray-200">
+            <div className="container mx-auto px-5 py-12 grid md:grid-cols-2 gap-10 items-center justify-center rounded-xl">
 
                 {/* 🎨 Artwork Image */}
                 <motion.div

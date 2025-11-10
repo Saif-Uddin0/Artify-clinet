@@ -16,7 +16,7 @@
 
 
 .btn-st {
-  @apply bg-gradient-to-r from-indigo-500 via-purple-500 to-purple-600  font-semibold rounded-md px-5 py-2 transition-all duration-300 hover:bg-gradient-to-r text-white hover:from-purple-500 hover:via-purple-600 hovero-indigo-500 hover:shadow-md;
+  @apply hover:bg-gradient-to-r hover:from-indigo-500 hover:via-purple-500 hover:to-purple-600  font-semibold rounded-md px-5 py-2 transition-all duration-300 text-white bg-gradient-to-r  from-purple-500 via-purple-600 to-indigo-500  hover:shadow-md;
 }
 .text-st {
   @apply bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 
