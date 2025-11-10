@@ -1,7 +1,8 @@
-import { useLoaderData } from "react-router";
+import { Link, useLoaderData } from "react-router";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { FaHeart, FaRegHeart, FaStar } from "react-icons/fa";
+import { ChevronLeft } from "lucide-react";
 
 const ArtworkDetails = () => {
     const data = useLoaderData();
@@ -37,8 +38,8 @@ const ArtworkDetails = () => {
 
     return (
         <section className="py-12  min-h-screen mt-20">
-            <div className="container mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
-                
+            <div className="container mx-auto px-5 py-12 grid md:grid-cols-2 gap-10 items-center justify-center rounded-xl border-t border-b  border-gray-200">
+
                 {/* 🎨 Artwork Image */}
                 <motion.div
                     initial={{ opacity: 0, x: -30 }}
@@ -87,7 +88,7 @@ const ArtworkDetails = () => {
                     </p>
 
                     {/* ❤️ Like & ⭐ Favorite Buttons */}
-                    <div className="flex items-center gap-4 mt-6">
+                    <div className="flex items-center justify-center gap-4 mt-6">
                         <motion.button
                             whileTap={{ scale: 1.2 }}
                             onClick={handleLike}
@@ -114,10 +115,16 @@ const ArtworkDetails = () => {
                                 {favorites ? "Added to Favorites" : "Add to Favorites"}
                             </span>
                         </motion.button>
-                    </div>
 
-                    
-                    
+                    </div>
+                    <Link to={'/'}>
+                    <motion.button
+                        className="btn btn-st mx-auto hover:transition-transform hover:scale-x-110 duration-500 text-center flex items-center justify-center"
+                    >
+                       <ChevronLeft/>Back
+                    </motion.button></Link>
+
+
                 </motion.div>
             </div>
         </section>
