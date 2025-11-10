@@ -8,6 +8,7 @@ import { path } from "framer-motion/client";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
+import AddArtwork from "../Pages/AddArtWork";
 
 
 
@@ -27,7 +28,9 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/add-art',
-                element: <h1>Add Art</h1>
+                element: <PrivateRoutes>
+                    <AddArtwork></AddArtwork>
+                </PrivateRoutes>
             },
             {
                 path: '/my-gallery',

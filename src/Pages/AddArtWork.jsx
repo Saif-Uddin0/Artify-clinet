@@ -12,7 +12,7 @@ const AddArtwork = () => {
     e.preventDefault();
     const form = e.target;
     const artwork = {
-      imageUrl: form.imageUrl.value,
+      url: form.url.value,
       title: form.title.value,
       category: form.category.value,
       medium: form.medium.value,
@@ -24,33 +24,33 @@ const AddArtwork = () => {
       userEmail: user?.email,
     };
 
-    try {
-      setLoading(true);
-      const res = await fetch("http://localhost:3000/artworks", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(artwork),
-      });
-      if (res.ok) {
-        toast.success("Artwork added successfully!");
-        form.reset();
-      } else {
-        toast.error("Failed to add artwork");
-      }
-    } catch (error) {
-      toast.error(error.message);
-    } finally {
-      setLoading(false);
-    }
+//     try {
+//       setLoading(true);
+//       const res = await fetch("http://localhost:3000/artworks", {
+//         method: "POST",
+//         headers: { "Content-Type": "application/json" },
+//         body: JSON.stringify(artwork),
+//       });
+//       if (res.ok) {
+//         toast.success("Artwork added successfully!");
+//         form.reset();
+//       } else {
+//         toast.error("Failed to add artwork");
+//       }
+//     } catch (error) {
+//       toast.error(error.message);
+//     } finally {
+//       setLoading(false);
+//     }
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gray-50 py-10">
+    <section className="min-h-screen flex items-center justify-center py-10">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-2xl border border-gray-100"
+        className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-2xl border border-gray-200  border-gray-200-gray-100"
       >
         <h1 className="text-3xl font-bold text-indigo-600 mb-4 text-center">
           Add New Artwork
@@ -68,10 +68,10 @@ const AddArtwork = () => {
               <FaImage className="absolute left-3 top-3 text-gray-400" />
               <input
                 required
-                name="imageUrl"
+                name="url"
                 type="text"
                 placeholder="Paste image URL"
-                className="w-full pl-10 pr-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/70"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/70"
               />
             </div>
           </div>
@@ -86,7 +86,7 @@ const AddArtwork = () => {
                 name="title"
                 type="text"
                 placeholder="Artwork title"
-                className="w-full pl-10 pr-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/70"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/70"
               />
             </div>
           </div>
@@ -96,7 +96,7 @@ const AddArtwork = () => {
             <label className="text-sm font-medium text-gray-700 mb-1">Category</label>
             <select
               name="category"
-              className="w-full pl-3 pr-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/70"
+              className="w-full pl-3 pr-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/70"
               required
             >
               <option value="">Select category</option>
@@ -118,7 +118,7 @@ const AddArtwork = () => {
                 name="medium"
                 type="text"
                 placeholder="E.g. Oil on Canvas, Photoshop"
-                className="w-full pl-10 pr-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/70"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/70"
               />
             </div>
           </div>
@@ -131,7 +131,7 @@ const AddArtwork = () => {
               name="description"
               rows={4}
               placeholder="Describe your artwork..."
-              className="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/70 resize-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/70 resize-none"
             />
           </div>
 
@@ -142,7 +142,7 @@ const AddArtwork = () => {
               name="dimensions"
               type="text"
               placeholder="E.g. 24 x 36 inches"
-              className="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/70"
+              className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/70"
             />
           </div>
 
@@ -155,7 +155,7 @@ const AddArtwork = () => {
                 name="price"
                 type="number"
                 placeholder="E.g. 200"
-                className="w-full pl-10 pr-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/70"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/70"
               />
             </div>
           </div>
@@ -167,7 +167,7 @@ const AddArtwork = () => {
               <FaEye className="absolute left-3 top-3 text-gray-400" />
               <select
                 name="visibility"
-                className="w-full pl-10 pr-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/70"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/70"
                 required
               >
                 <option value="Public">Public</option>
@@ -183,7 +183,7 @@ const AddArtwork = () => {
               type="text"
               value={user?.displayName || ""}
               readOnly
-              className="w-full px-4 py-2 border rounded-xl bg-gray-100 cursor-not-allowed"
+              className="w-full px-4 py-2 border border-gray-300 rounded-xl bg-gray-100 cursor-not-allowed"
             />
           </div>
 
@@ -194,7 +194,7 @@ const AddArtwork = () => {
               type="text"
               value={user?.email || ""}
               readOnly
-              className="w-full px-4 py-2 border rounded-xl bg-gray-100 cursor-not-allowed"
+              className="w-full px-4 py-2 border border-gray-300 rounded-xl bg-gray-100 cursor-not-allowed"
             />
           </div>
 
@@ -204,7 +204,7 @@ const AddArtwork = () => {
             whileTap={{ scale: 0.95 }}
             type="submit"
             disabled={loading}
-            className="w-full btn btn-st text-white hover:bg-indigo-700 font-semibold rounded-lg shadow-md transition-all flex items-center justify-center gap-2"
+            className="w-full btn btn-st text-white btn-st font-semibold rounded-lg shadow-md transition-all flex items-center justify-center gap-2"
           >
             {loading ? "Adding..." : "Add Artwork"}
           </motion.button>
