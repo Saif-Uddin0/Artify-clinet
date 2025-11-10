@@ -12,6 +12,7 @@ const AuthPorvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
+console.log(user);
 
     // register a new User
     const createUser = (email, password) => {
@@ -21,7 +22,7 @@ const AuthPorvider = ({ children }) => {
 
     // login a user
     const signInUser = (email, password) => {
-        loading(true);
+        setLoading(true);
         return signInWithEmailAndPassword(auth, email, password)
     }
 
@@ -39,7 +40,7 @@ const AuthPorvider = ({ children }) => {
     },[])
 
     // signout
-    const signOut=() => {
+    const logOut=() => {
         setLoading(true);
         return signOut(auth)
     } 
@@ -60,7 +61,7 @@ const AuthPorvider = ({ children }) => {
         setLoading,
         createUser,
         signInUser,
-        signOut,
+        logOut,
         signInWithGoogle
     }
 

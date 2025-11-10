@@ -1,31 +1,41 @@
 import React, { use } from "react";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { motion } from "framer-motion";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import { AuthContext } from "../Provider/AuthContext";
 import { FcGoogle } from "react-icons/fc";
+import { toast } from "react-toastify";
+import { LogIn } from "lucide-react";
 
 const Login = () => {
-    const { signInWithGoogle, signInUser, setUser } = use(AuthContext)
+    const { signInWithGoogle, signInUser, setUser } = use(AuthContext);
 
+    // navigate
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+
+
+    // googleSignIN
     const handleGoogleSignIn = () => {
         signInWithGoogle()
             .then((result) => {
                 const loggedUser = result.user;
                 setUser(loggedUser);
                 console.log(loggedUser);
-
-                // toast.success("Logged in with Google");
-                // navigate("/", { replace: true });
+                toast.success("Logged in with Google");
+                navigate(from,{replace: true});
             })
             .catch((error) => {
-                // toast.error(error.message);
+                toast.error(error.message);
                 console.log(error);
 
             });
     };
 
 
+
+    // submit the form
     const handleLogin = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -35,16 +45,14 @@ const Login = () => {
         signInUser(email, password)
             .then((res) => {
                 const UserIn = res.user
+                setUser(UserIn);
+                toast.success('Log in successfully')
                 console.log(UserIn);
-
-                // toast.success('Log in successfully')
-                e.target.reset();
-                // console.log(UserIn);
-                // navigate(`${location.state ? location.state : '/'}`);
+                navigate(from,{replace: true});
 
             })
             .catch(error => {
-                // toast.error("Invalid Email or Password")
+                toast.error("Invalid Email or Password")
                 console.log(error);
 
                 // seTError(error.message)
@@ -139,9 +147,9 @@ const Login = () => {
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         type="submit"
-                        className="w-full btn btn-st hover:bg-indigo-700 text-white font-semibold rounded-lg shadow-md transition-all"
+                        className="w-full btn btn-st flex items-center justify-center gap-x-1.5 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow-md transition-all"
                     >
-                        Login
+                        Login<LogIn />
                     </motion.button>
                 </form>
 

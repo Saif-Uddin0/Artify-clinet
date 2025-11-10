@@ -1,18 +1,22 @@
 import React, { use, useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { motion } from "framer-motion";
 import { FaUser, FaEnvelope, FaImage, FaLock } from "react-icons/fa";
 import { AuthContext } from "../Provider/AuthContext";
 import { FcGoogle } from "react-icons/fc";
+import { toast } from "react-toastify";
+import { updateProfile } from "firebase/auth";
+import { KeyRound } from "lucide-react";
 
 const Register = () => {
   const [passwordEr, setPasswordError] = useState("");
+  const navigate = useNavigate();
   // const [error, setError] = useState("");
 
 
 
   // google signIn
-  const { signInWithGoogle, setUser ,createUser } = use(AuthContext)
+  const { signInWithGoogle, setUser, createUser } = use(AuthContext)
 
   const handleGoogleSignIn = () => {
     signInWithGoogle()
@@ -21,8 +25,8 @@ const Register = () => {
         setUser(loggedUser);
         console.log(loggedUser);
 
-        // toast.success("Logged in with Google");
-        // navigate("/", { replace: true });
+        toast.success("Logged in with Google");
+        navigate("/", { replace: true });
       })
       .catch((error) => {
         // toast.error(error.message);
@@ -31,50 +35,71 @@ const Register = () => {
       });
   };
 
-    const handleRegister = (e) => {
-        e.preventDefault();
-        const form = e.target;
-        const name = form.name.value;
-        const url = form.url.value;
-        const email = form.email.value;
+  const handleRegister = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const name = form.name.value;
+    const url = form.url.value;
+    const email = form.email.value;
 
 
-        // password authintication
-        const password = form.password.value;
-        console.log(name,password,email,url)
-        if (password.length < 6) {
-            setPasswordError("Password must be at least 6 characters long.");
-            return;
-        }
-        if (!/[A-Z]/.test(password)) {
-            setPasswordError("Password must contain at least one uppercase letter.");
-            return;
-        }
-        if (!/[a-z]/.test(password)) {
-            setPasswordError("Password must contain at least one lowercase letter.");
-            return;
-        }
-        setPasswordError("");
-        createUser(email, password)
-            .then((res) => {
-                const theuser = res.user;
-                console.log(theuser);
-                     
-            })
-            .catch((error) => {
-                const errorMessage = error.message;
-                // toast.error(errorMessage);
-                console.log(errorMessage);
-                
-
+    // password authintication
+    const password = form.password.value;
+    console.log(name, password, email, url)
+    if (password.length < 6) {
+      setPasswordError("Password must be at least 6 characters long.");
+      return;
+    }
+    if (!/[A-Z]/.test(password)) {
+      setPasswordError("Password must contain at least one uppercase letter.");
+      return;
+    }
+    if (!/[a-z]/.test(password)) {
+      setPasswordError("Password must contain at least one lowercase letter.");
+      return;
+    }
+    setPasswordError("");
+    createUser(email, password)
+      .then((res) => {
+        const theuser = res.user;
+        updateProfile(theuser, {
+          displayName: name,
+          photoURL: url,
+        })
+          .then(() => {
+            setUser({
+              ...theuser,
+              displayName: name,
+              photoURL: url,
             });
 
+            // console.log(theuser);
+            navigate('/', { replace: true })
+            toast.success('Sign In successfully')
+          })
+        
+
+          .catch((err) => {
+            console.error("Profile update failed:", err);
+          });
+
+
+
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        toast.error(errorMessage);
+        console.log(errorMessage);
+
+
+      });
 
 
 
 
-    }
-  
+
+  }
+
 
 
 
@@ -165,9 +190,9 @@ const Register = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             type="submit"
-            className="w-full btn btn-st glass-bg text-black hover:bg-indigo-700  font-semibold rounded-lg shadow-md transition-all"
+            className="w-full flex items-center justify-center gap-x-1.5  btn  btn-st glass-bg text-black hover:bg-indigo-700  font-semibold rounded-lg shadow-md transition-all"
           >
-            Register
+            Register<KeyRound size={22}  />
           </motion.button>
         </form>
 

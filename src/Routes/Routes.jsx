@@ -7,6 +7,7 @@ import AuthLayout from "../Layout/AuthLayout";
 import { path } from "framer-motion/client";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
+import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 
 
 
@@ -38,7 +39,10 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/artwork-details/:id',
-                element: <ArtworkDetails></ArtworkDetails>,
+                element:
+                    <PrivateRoutes>
+                        <ArtworkDetails></ArtworkDetails>
+                    </PrivateRoutes>,
                 loader: ({ params }) => fetch(`http://localhost:3000/artwork-details/${params.id}`),
             }
         ]
@@ -47,16 +51,16 @@ export const router = createBrowserRouter([
     {
         path: 'auth',
         element: <AuthLayout></AuthLayout>,
-        children:[
-            
-        {
-            path: '/auth/login',
-            element: <Login></Login>
-        },
-        {
-            path: '/auth/register',
-            element: <Register></Register>
-        },
-    ]
+        children: [
+
+            {
+                path: '/auth/login',
+                element: <Login></Login>
+            },
+            {
+                path: '/auth/register',
+                element: <Register></Register>
+            },
+        ]
     }
 ]);
