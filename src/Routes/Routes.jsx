@@ -10,6 +10,7 @@ import Register from "../Pages/Register";
 import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 import AddArtwork from "../Pages/AddArtWork";
 import ExploreArtworks from "../Pages/ExploreArtWorks";
+import MyGallery from "../Pages/MyGallery";
 
 
 
@@ -35,7 +36,9 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/my-gallery',
-                element: <h1>My Gallery</h1>
+                element: <PrivateRoutes>
+                    <MyGallery></MyGallery>
+                </PrivateRoutes>
             },
             {
                 path: '/my-favorite',

@@ -50,14 +50,14 @@ const CommunityHighlights = () => {
           {highlights.map((item, index) => (
             <motion.div
               key={index}
-              className="bg-white mt-8 rounded-xl overflow-hidden shadow-md cursor-pointer transition-all"
+              className="bg-white mt-8 rounded-xl overflow-hidden shadow-md cursor-pointer transition-all "
               whileHover={{
-                scale: 1.05,
+                scale: 1.03,
                 boxShadow: "0 15px 30px rgba(0,0,0,0.2)",
               }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.15 }}
+              transition={{ duration: 0.4, delay: index * 0.10 }}
             >
               {/* Image Section */}
               <img

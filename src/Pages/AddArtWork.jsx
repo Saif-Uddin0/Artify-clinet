@@ -2,6 +2,7 @@ import React, { use, useState } from "react";
 import { motion } from "framer-motion";
 import { AuthContext } from "../Provider/AuthContext";
 import { FaImage, FaPalette, FaPenNib, FaDollarSign, FaEye } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 const AddArtwork = () => {
     const { user, loading, setLoading } = use(AuthContext);
@@ -22,7 +23,7 @@ const AddArtwork = () => {
             userEmail: user?.email,
             createdAt: new Date(),
         };
-        console.log(artwork);
+
 
 
         fetch('http://localhost:3000/artwork', {
@@ -33,8 +34,16 @@ const AddArtwork = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Your work has been saved",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+                e.target.reset();
             })
+            
             .catch(err => {
                 console.log(err.message);
 

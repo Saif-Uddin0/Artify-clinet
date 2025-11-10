@@ -11,6 +11,7 @@ const Navbar = () => {
   const [isHovered, setIsHovered] = useState(false);
   const navLinks = (
     <>
+    
       <li>
         <NavLink
           to="/"
