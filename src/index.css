@@ -16,11 +16,14 @@
 
 
 .btn-st {
-  @apply bg-gradient-to-r from-indigo-500 via-purple-500 to-purple-600 text-white font-semibold rounded-md px-5 py-2 transition-all duration-300 hover:opacity-70 hover:shadow-md;
+  @apply bg-gradient-to-r from-indigo-500 via-purple-500 to-purple-600  font-semibold rounded-md px-5 py-2 transition-all duration-300 hover:bg-gradient-to-r text-white hover:from-purple-500 hover:via-purple-600 hovero-indigo-500 hover:shadow-md;
 }
 .text-st {
-  @apply bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent;
+  @apply bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 
+         hover:bg-gradient-to-r hover:from-pink-500 hover:via-indigo-500 
+         bg-clip-text text-transparent;
 }
+
 
 .glass-bg {
   @apply bg-white/20 backdrop-blur-md border border-white/30 shadow-lg;

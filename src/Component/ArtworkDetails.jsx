@@ -119,9 +119,10 @@ const ArtworkDetails = () => {
                     </div>
                     <Link to={'/'}>
                     <motion.button
-                        className="btn btn-st mx-auto hover:transition-transform hover:scale-x-110 duration-500 text-center flex items-center justify-center"
+                        className="group btn btn-st flex items-center justify-center gap-2 hover:scale-105 transition-all duration-500 w-full text-white overflow-hidden "
                     >
-                       <ChevronLeft/>Back
+                        <span className="transition-all duration-700 ease-in-out group-hover:translate-x-4">Back</span>
+                       <ChevronLeft className="transition-all duration-700 ease-in-out group-hover:-translate-x-15"/>
                     </motion.button></Link>
 
 
