@@ -6,10 +6,10 @@ import { AuthContext } from "../Provider/AuthContext";
 import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
-    const { googlsignInWithGoogle, signInUser, setUser } = use(AuthContext)
+    const { signInWithGoogle, signInUser, setUser } = use(AuthContext)
 
     const handleGoogleSignIn = () => {
-        googlsignInWithGoogle()
+        signInWithGoogle()
             .then((result) => {
                 const loggedUser = result.user;
                 setUser(loggedUser);
@@ -31,7 +31,7 @@ const Login = () => {
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-        // console.log(email, password);
+        console.log(email, password);
         signInUser(email, password)
             .then((res) => {
                 const UserIn = res.user
@@ -150,10 +150,10 @@ const Login = () => {
                 {/* <!-- Google --> */}
                 <button
                         onClick={handleGoogleSignIn}
-                        className="flex items-center justify-center gap-2 w-full py-2 border rounded-md bg-white hover:bg-gray-100 transition"
+                        className="flex items-center justify-center gap-2 w-full py-2 border border-purple-500 rounded-md bg-white text-st hover:bg-gray-100 transition"
                     >
                         <FcGoogle size={22} />
-                        <span className="text-gray-700 font-medium">Continue with Google</span>
+                        <span className=" font-medium">Continue with Google</span>
                     </button>
 
                 {/* Register Link */}
@@ -161,7 +161,7 @@ const Login = () => {
                     <span className="italic"> Don’t have an account?{"  "}</span>
                     <Link
                         to="/auth/register"
-                        className="text-st hover:text-indigo-800 font-medium transition-colors duration-300"
+                        className="text-indigo-500 underline font-medium transition-colors duration-300"
                     >
                         Register here
                     </Link>
