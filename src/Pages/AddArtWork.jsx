@@ -35,7 +35,7 @@ const AddArtwork = () => {
             .then(data => {
                 console.log(data);
                 Swal.fire({
-                    position: "top-end",
+                    position: "center",
                     icon: "success",
                     title: "Your work has been saved",
                     showConfirmButton: false,

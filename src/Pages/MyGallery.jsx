@@ -22,7 +22,6 @@ const MyGallery = () => {
     }, [user]);
 
     const handleDelete = (_id) => {
-        console.log(_id);
 
         Swal.fire({
             title: "Are you sure?",

@@ -133,7 +133,7 @@ const Navbar = () => {
               <img
                 className="w-11 h-11 rounded-full border-2 border-indigo-500 shadow-md cursor-pointer hover:scale-105 transition-transform duration-300 "
                 src={user.photoURL || "https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg"}
-                alt={user.displayName || "User"}
+                
               />
 
               <AnimatePresence>

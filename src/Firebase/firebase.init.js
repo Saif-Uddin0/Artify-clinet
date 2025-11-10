@@ -6,12 +6,12 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCrbXDTA5FQ_uqRUBosFOXOrlnknzX1No4",
-  authDomain: "artify-c4d2a.firebaseapp.com",
-  projectId: "artify-c4d2a",
-  storageBucket: "artify-c4d2a.firebasestorage.app",
-  messagingSenderId: "63969374297",
-  appId: "1:63969374297:web:c61c1a74d9e52ddc338148"
+  apiKey: import.meta.env.VITE_APIKEY,
+  authDomain: import.meta.env.VITE_AUTHDOMAIN,
+  projectId: import.meta.env.VITE_PROJECTID,
+  storageBucket: import.meta.env.VITE_STORAGEBUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGINGSENDERID,
+  appId: import.meta.env.VITE_APPID
 };
 
 // Initialize Firebase

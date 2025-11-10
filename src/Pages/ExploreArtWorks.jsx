@@ -85,11 +85,11 @@ const ExploreArtworks = () => {
                                     alt={art.title}
                                     className="w-full h-48 object-cover"
                                 />
-                                <p className="absolute badge bg-white/70 text-purple-600 border border-purple-600 top-2.5 left-2 z-10">{art.category}</p>
+                                <p className="absolute badge badge-ghost text-indigo-500 border bottom-1.5 left-1 z-50">{art.category}</p>
                             </div>
                             <div className="p-4">
                                 <h2 className="text-lg font-semibold text-gray-800">{art.title}</h2>
-                                <p className="text-sm text-gray-500">By {art.userName}</p>
+                                <p className="text-sm text-gray-500">By <span className="text-xs font-semibold text-gray-700">{art.userName}</span></p>
                                 <p className="text-sm text-gray-400 mt-1">
                                     Likes: {art.likes || 0}
                                 </p>
