@@ -33,7 +33,7 @@ const Login = () => {
                             name="email"
                             type="email"
                             placeholder="Enter your email"
-                            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-400 bg-white/70"
+                            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/70"
                         />
                     </div>
                 </div>
@@ -50,7 +50,7 @@ const Login = () => {
                             name="password"
                             type='password'
                             placeholder="Enter your password"
-                            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-400 bg-white/70"
+                            className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/70"
                         />
                     </div>
                     </div>

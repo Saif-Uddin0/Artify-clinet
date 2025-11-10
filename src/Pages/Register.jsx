@@ -48,7 +48,7 @@ const Register = () => {
                 name="name"
                 type="text"
                 placeholder="Enter your full name"
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-400 bg-white/70"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/70"
               />
             </div>
           </div>
@@ -63,7 +63,7 @@ const Register = () => {
                 name="email"
                 type="email"
                 placeholder="Enter your email"
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-400 bg-white/70"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/70"
               />
             </div>
           </div>
@@ -78,7 +78,7 @@ const Register = () => {
                 name="photo"
                 type="text"
                 placeholder="Paste your profile photo URL"
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-400 bg-white/70"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/70"
               />
             </div>
           </div>
@@ -96,7 +96,7 @@ const Register = () => {
                 value={password}
                 onChange={(e) => validatePassword(e.target.value)}
                 className={`w-full pl-10 pr-4 py-2 border rounded-xl focus:outline-none focus:ring-2 ${
-                  error ? "border-red-400 focus:ring-red-300" : "border-gray-300 focus:ring-sky-400"
+                  error ? "border-red-400 focus:ring-red-300" : "border-gray-300 focus:ring-indigo-400"
                 } bg-white/70 transition-all`}
               />
             </div>
