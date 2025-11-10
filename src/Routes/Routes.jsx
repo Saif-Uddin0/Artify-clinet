@@ -9,6 +9,7 @@ import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 import AddArtwork from "../Pages/AddArtWork";
+import ExploreArtworks from "../Pages/ExploreArtWorks";
 
 
 
@@ -24,7 +25,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/explore-art',
-                element: <h1>Explore art</h1>
+                element: <ExploreArtworks></ExploreArtworks>
             },
             {
                 path: '/add-art',

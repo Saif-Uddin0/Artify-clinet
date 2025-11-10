@@ -1,16 +1,34 @@
 import { ArrowRight } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
+import Loader from "../Shared/Loader";
 
 const FeaturedArtworks = () => {
     const [artworks, setArtworks] = useState([]);
+    const [loading , setLoading] = useState(false);
 
     useEffect(() => {
+        setLoading(true);
         fetch("http://localhost:3000/feauters-artwork")
             .then((res) => res.json())
-            .then((data) => setArtworks(data))
+            .then((data) => {
+                setArtworks(data)
+                console.log(data);
+                setLoading(false);
+                
+            })
             .catch((err) => console.error(err));
     }, []);
+    
+
+
+    if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-40">
+        <Loader/>
+      </div>
+    );
+  }
 
     return (
         <div className=" py-16">
@@ -32,6 +50,10 @@ const FeaturedArtworks = () => {
                                     alt={art.title}
                                     className="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
                                 />
+                                <p className=" absolute bottom-2.5 left-2 badge badge-ghost z-5  text-indigo-600 text-xs font-semibold">
+                                    {art.category}
+                                </p>
+
                             </div>
 
                             {/* Card Body */}
@@ -44,18 +66,8 @@ const FeaturedArtworks = () => {
                                     By <span className="font-medium text-gray-700">{art.userName}</span>
                                 </p>
 
-                                <p className="text-indigo-600 text-sm font-medium">
-                                    {art.category}
-                                </p>
-
+                                
                                 <div className="mt-4">
-                                    {/* <Link
-                                        to={`/artwork-details/${art._id}`}
-                                        className="group btn btn-st flex items-center justify-center gap-2 hover:scale-105 transition-all duration-1000 w-full text-white"
-                                    >
-                                        <span className="transition-all duration-1000 group-hover:order-2">View Details</span><ArrowRight className="transition-all duration-1000 group-hover:-translate-x-1 group-hover:order-1" />
-                                    </Link> */}
-
 
                                     <Link
                                         to={`/artwork-details/${art._id}`}
