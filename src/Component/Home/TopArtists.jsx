@@ -15,7 +15,7 @@ const topArtists = [
 
 const TopArtists = () => {
   return (
-    <section className="py-12 bg-gray-50">
+    <section className="py-12 ">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-indigo-600 mb-6 text-center flex justify-center items-center gap-2 v">
           <FaStar className="text-orange-400"></FaStar> Top Artists of the Week
@@ -25,7 +25,7 @@ const TopArtists = () => {
           {topArtists.map((artist, index) => (
             <motion.div
               key={index}
-              className="bg-white rounded-xl shadow-lg p-6 text-center cursor-pointer"
+              className="bg-gray-50 rounded-xl shadow-lg p-6 text-center cursor-pointer"
               whileHover={{ scale: 1.05, boxShadow: "0 15px 30px rgba(0,0,0,0.2)" }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}

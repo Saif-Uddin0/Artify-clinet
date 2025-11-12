@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { AuthContext } from "../Provider/AuthContext";
 import { FaImage, FaPalette, FaPenNib, FaDollarSign, FaEye } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { ImagePlus } from "lucide-react";
 
 const AddArtwork = () => {
     const { user, loading, setLoading } = use(AuthContext);
@@ -51,12 +52,13 @@ const AddArtwork = () => {
     };
 
     return (
-        <section className="min-h-screen flex items-center justify-center py-10">
+        <section className="min-h-screen flex items-center justify-center py-10 ">
             <motion.div
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-2xl border border-gray-200  border-gray-200-gray-100"
+                className="bg-gradient-to-br from-pink-300/20 via-purple-300/20 to-blue-300/20
+                      backdrop-blur-xl shadow-xl rounded-2xl p-8 w-full max-w-2xl border border-gray-200  border-gray-200-gray-100"
             >
                 <h1 className="text-3xl font-bold text-indigo-600 mb-4 text-center">
                     Add New Artwork
@@ -212,7 +214,7 @@ const AddArtwork = () => {
                         disabled={loading}
                         className="w-full btn btn-st text-white btn-st font-semibold rounded-lg shadow-md transition-all flex items-center justify-center gap-2"
                     >
-                        {loading ? "Adding..." : "Add Artwork"}
+                        <ImagePlus />Add Artwork
                     </motion.button>
                 </form>
             </motion.div>

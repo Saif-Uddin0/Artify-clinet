@@ -71,51 +71,113 @@ const ExploreArtworks = () => {
 
 
             {/* Artworks Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-8 md:mt-15 container mx-auto">
-                {filteredArtworks.length > 0 ? (
-                    filteredArtworks.map((art) => (
-                        <motion.div
-                            key={art._id}
-                            whileHover={{ scale: 1.03 }}
-                            className="bg-white shadow-lg rounded-2xl overflow-hidden border border-gray-200"
-                        >
-                            <div className="relative">
-                                <img
-                                    src={art.image}
-                                    alt={art.title}
-                                    className="w-full h-48 object-cover"
-                                />
-                                <p className="absolute badge badge-ghost text-indigo-500 border bottom-1.5 left-1 z-50">{art.category}</p>
-                            </div>
-                            <div className="p-4">
-                                <h2 className="text-lg font-semibold text-gray-800">{art.title}</h2>
-                                <p className="text-sm text-gray-500">By <span className="text-xs font-semibold text-gray-700">{art.userName}</span></p>
-                                <p className="text-sm text-gray-400 mt-1">
-                                    Likes: {art.likes || 0}
-                                </p>
-                                <Link
-                                    to={`/artwork-details/${art._id}`}
-                                    className="group mt-3 btn btn-st flex items-center justify-center gap-2 hover:scale-105 transition-all duration-500 w-full text-white overflow-hidden"
-                                >
-                                    {/* Text */}
-                                    <span className="transition-all duration-700 ease-in-out group-hover:translate-x-3">
-                                        View Details
-                                    </span>
+            <div className="mt-10 px-4 py-12">
+                <div
+                    className="container mx-auto 
+          grid gap-5 p-5 
+          sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 
+          justify-items-center
+          "
+                >
+                    {artworks.map((item) => (
+          <div
+            key={item._id}
+            className="relative w-full max-w-sm 
+                      bg-gradient-to-br from-pink-300/20 via-purple-300/20 to-blue-300/20
+                      backdrop-blur-xl border border-white/30
+                      p-5 rounded-bl-4xl rounded-tr-4xl 
+                      shadow-sm hover:shadow-xl transition-all duration-500
+                      hover:-translate-y-2 hover:scale-[1.02]"
+          >
+            {/* Image Section */}
+            <div className="relative overflow-hidden rounded-2xl mb-4 group">
+              <img
+                src={item.image}
+                alt={item.title}
+                className="w-full h-64 object-cover rounded-2xl
+                           transition-all duration-700 ease-in-out
+                           group-hover:scale-110 group-hover:brightness-110"
+              />
 
-                                    {/* Arrow */}
-                                    <ArrowRight
-                                        className="transition-all duration-700 ease-in-out group-hover:-translate-x-27 "
-                                    />
-                                </Link>
-                            </div>
-                        </motion.div>
-                    ))
-                ) : (
-                    <p className="text-center col-span-full text-gray-500">
-                        failed to Load Data
-                    </p>
-                )}
+              {/* Hover Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent 
+                              opacity-0 group-hover:opacity-70 transition-opacity duration-700 flex items-end justify-center pb-6">
+                <Link
+                  to={`/artwork-details/${item._id}`}
+                  className="text-white text-sm bg-indigo-600/80 px-4 py-2 rounded-full shadow hover:bg-indigo-700 transition"
+                >
+                  View Details
+                </Link>
+              </div>
+
+              {/* Badges */}
+              <div className="absolute top-3 left-3 flex gap-2 flex-wrap">
+                <span className="px-3 py-1 text-[11px] font-semibold 
+                                bg-gradient-to-r from-indigo-500 to-purple-500 text-white 
+                                rounded-full shadow-sm 
+                                backdrop-blur-sm
+                                hover:scale-105 transition-transform">
+                  {item.category}
+                </span>
+                <span className="px-3 py-1 text-[11px] font-semibold 
+                                bg-gradient-to-r from-pink-500 to-rose-500 text-white 
+                                rounded-full shadow-sm 
+                                backdrop-blur-sm
+                                hover:scale-105 transition-transform">
+                  {item.medium}
+                </span>
+              </div>
             </div>
+
+            {/* Content Section */}
+            <div className=" space-y-3">
+              <h3 className="text-lg font-semibold text-gray-900 group-hover:text-indigo-600 transition">
+                {item.title}
+              </h3>
+
+              {/* Artist Info */}
+              {item.userName && (
+                <p className="text-sm text-gray-500 italic">
+                  by <span className="font-medium text-indigo-600">{item.userName}</span>
+                </p>
+              )}
+
+              {/* Description (short preview) */}
+              {item.description && (
+                <p className="text-sm font-light text-gray-500 line-clamp-2">
+                  {item.description.slice(0, 80)}...
+                </p>
+              )}
+
+              {/* Price & Visibility */}
+              <div className="flex items-center justify-between text-sm text-gray-700 mt-3">
+                <p className="font-semibold text-indigo-700 text-lg">${item.price}</p>
+                <span
+                  className={`px-3 py-1 rounded-full text-xs font-medium ${
+                    item.visibility === "Public"
+                      ? "bg-green-100 text-green-600"
+                      : "bg-yellow-100 text-yellow-600"
+                  }`}
+                >
+                  {item.visibility || "Unknown"}
+                </span>
+              </div>
+
+              {/* View Details Button */}
+              <Link
+                to={`/artwork-details/${item._id}`}
+                className="group btn btn-st flex items-center justify-center gap-2 hover:scale-105 transition-all duration-500 w-full text-white overflow-hidden mt-3"
+              >
+                <span className="transition-all duration-700 ease-in-out group-hover:translate-x-4">
+                  View Details
+                </span>
+                <ArrowRight className="transition-all duration-700 ease-in-out group-hover:-translate-x-30" />
+              </Link>
+            </div>
+          </div>
+        ))}
+                </div>
+        </div>
         </section>
     );
 };

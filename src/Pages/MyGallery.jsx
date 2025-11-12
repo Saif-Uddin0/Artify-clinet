@@ -16,7 +16,7 @@ const MyGallery = () => {
     useEffect(() => {
         if (!user?.email) return;
         setLoader(true);
-        fetch('http://localhost:3000/artwork')
+        fetch(`http://localhost:3000/artwork`)
             .then((res) => res.json())
             .then((data) => {
                 const myArts = data.filter((art) => art.userEmail === user.email);
@@ -24,6 +24,7 @@ const MyGallery = () => {
                 setLoader(false);
             });
     }, [user]);
+
 
 
 
@@ -166,7 +167,8 @@ const MyGallery = () => {
                 <p className="text-gray-500 text-center italic">No artworks found.</p>
             ) : (
                 <div className="overflow-x-auto mt-10">
-                    <table className="min-w-full bg-white shadow-md rounded-xl border border-gray-100">
+                    <table className="min-w-full bg-gradient-to-br from-pink-300/20 via-purple-300/20 to-blue-300/20
+                      backdrop-blur-xl shadow-md rounded-xl border border-gray-100">
                         <thead className="glass-bg text-gray-700 text-xs sm:text-sm font-semibold">
                             <tr className="">
                                 <th className="py-3 sm:py-4 px-3 sm:px-5 text-left">SL</th>

@@ -3,7 +3,7 @@ import { use, useState } from 'react';
 import { Link, NavLink } from 'react-router';
 import { AuthContext } from '../../Provider/AuthContext';
 import { toast } from 'react-toastify';
-import { LogOut } from "lucide-react";
+import { BookImage, BookmarkPlus, Earth, House, LogOut, Star } from "lucide-react";
 
 
 const Navbar = () => {
@@ -15,26 +15,26 @@ const Navbar = () => {
         <NavLink
           to="/"
           className={({ isActive }) =>
-            `px-4 py-2 rounded-md transition-all duration-300 ${isActive
+            `px-4 py-2 rounded-md sm:font-semibold sm:text-gray-600 transition-all duration-300 ${isActive
               ? "text-st font-semibold border-b-2 border-indigo-600"
               : "hover:text-indigo-500"
             }`
           }
         >
-          Home
+          <House color="black" size={16}/>Home
         </NavLink>
       </li>
       <li>
         <NavLink
           to="/explore-art"
           className={({ isActive }) =>
-            `px-4 py-2 rounded-md transition-all duration-300 ${isActive
+            `px-4 py-2 sm:font-semibold sm:text-gray-600  rounded-md transition-all duration-300 ${isActive
               ? "text-st font-semibold border-b-2 border-indigo-600"
               : "hover:text-indigo-500"
             }`
           }
         >
-          Explore Artworks
+          <Earth color="black" size={16}/>Explore Artworks
         </NavLink>
       </li>
 
@@ -44,39 +44,39 @@ const Navbar = () => {
             <NavLink
               to="/add-art"
               className={({ isActive }) =>
-                `px-4 py-2 rounded-md transition-all duration-300 ${isActive
+                `px-4 py-2 sm:font-semibold sm:text-gray-600 rounded-md transition-all duration-300 ${isActive
                   ? "text-st font-semibold border-b-2 border-indigo-600"
                   : "hover:text-indigo-500"
                 }`
               }
             >
-              Add Artwork
+              <BookmarkPlus color="black" size={16} />Add Artwork
             </NavLink>
           </li>
           <li>
             <NavLink
               to="/my-gallery"
               className={({ isActive }) =>
-                `px-4 py-2 rounded-md transition-all duration-300 ${isActive
+                `px-4 py-2 sm:font-semibold sm:text-gray-600 rounded-md transition-all duration-300 ${isActive
                   ? "text-st font-semibold border-b-2 border-indigo-600"
                   : "hover:text-indigo-500"
                 }`
               }
             >
-              My Gallery
+              <BookImage color="black" size={16} />My Gallery
             </NavLink>
           </li>
           <li>
             <NavLink
               to="/my-favorite"
               className={({ isActive }) =>
-                `px-4 py-2 rounded-md transition-all duration-300 ${isActive
+                `px-4 py-2 sm:font-semibold sm:text-gray-600 rounded-md transition-all duration-300 ${isActive
                   ? "text-st font-semibold border-b-2 border-indigo-600"
                   : "hover:text-indigo-500"
                 }`
               }
             >
-              My Favorites
+             <Star color="black" size={16} /> My Favorites
             </NavLink>
           </li>
 
