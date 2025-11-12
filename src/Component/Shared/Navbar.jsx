@@ -11,7 +11,6 @@ const Navbar = () => {
   const [isHovered, setIsHovered] = useState(false);
   const navLinks = (
     <>
-    
       <li>
         <NavLink
           to="/"
@@ -38,45 +37,57 @@ const Navbar = () => {
           Explore Artworks
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="/add-art"
-          className={({ isActive }) =>
-            `px-4 py-2 rounded-md transition-all duration-300 ${isActive
-              ? "text-st font-semibold border-b-2 border-indigo-600"
-              : "hover:text-indigo-500"
-            }`
-          }
-        >
-          Add Artwork
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/my-gallery"
-          className={({ isActive }) =>
-            `px-4 py-2 rounded-md transition-all duration-300 ${isActive
-              ? "text-st font-semibold border-b-2 border-indigo-600"
-              : "hover:text-indigo-500"
-            }`
-          }
-        >
-          My Gallery
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/my-favorite"
-          className={({ isActive }) =>
-            `px-4 py-2 rounded-md transition-all duration-300 ${isActive
-              ? "text-st font-semibold border-b-2 border-indigo-600"
-              : "hover:text-indigo-500"
-            }`
-          }
-        >
-          My Favorites
-        </NavLink>
-      </li>
+
+      {
+        user && <>
+          <li>
+            <NavLink
+              to="/add-art"
+              className={({ isActive }) =>
+                `px-4 py-2 rounded-md transition-all duration-300 ${isActive
+                  ? "text-st font-semibold border-b-2 border-indigo-600"
+                  : "hover:text-indigo-500"
+                }`
+              }
+            >
+              Add Artwork
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/my-gallery"
+              className={({ isActive }) =>
+                `px-4 py-2 rounded-md transition-all duration-300 ${isActive
+                  ? "text-st font-semibold border-b-2 border-indigo-600"
+                  : "hover:text-indigo-500"
+                }`
+              }
+            >
+              My Gallery
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/my-favorite"
+              className={({ isActive }) =>
+                `px-4 py-2 rounded-md transition-all duration-300 ${isActive
+                  ? "text-st font-semibold border-b-2 border-indigo-600"
+                  : "hover:text-indigo-500"
+                }`
+              }
+            >
+              My Favorites
+            </NavLink>
+          </li>
+
+        </>
+      }
+
+
+
+
+
+
     </>
   );
 
@@ -133,7 +144,7 @@ const Navbar = () => {
               <img
                 className="w-11 h-11 rounded-full border-2 border-indigo-500 shadow-md cursor-pointer hover:scale-105 transition-transform duration-300 "
                 src={user.photoURL || "https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg"}
-                
+
               />
 
               <AnimatePresence>

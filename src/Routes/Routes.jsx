@@ -11,6 +11,7 @@ import PrivateRoutes from "../PrivateRoutes/PrivateRoutes";
 import AddArtwork from "../Pages/AddArtWork";
 import ExploreArtworks from "../Pages/ExploreArtWorks";
 import MyGallery from "../Pages/MyGallery";
+import MyFavourite from "../Pages/MyFavourite";
 
 
 
@@ -42,7 +43,9 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/my-favorite',
-                element: <h1>My favourite</h1>
+                element: <PrivateRoutes>
+                    <MyFavourite></MyFavourite>
+                </PrivateRoutes>
             },
             {
                 path: '/artwork-details/:id',

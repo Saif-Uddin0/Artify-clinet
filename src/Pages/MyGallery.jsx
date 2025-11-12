@@ -1,18 +1,22 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../Provider/AuthContext";
 import { Pencil, Trash2 } from "lucide-react";
 import Swal from "sweetalert2";
 import Loader from "../Component/Shared/Loader";
+import Modal from "../Component/Shared/Modal";
 
 const MyGallery = () => {
     const { user } = useContext(AuthContext);
     const [arts, setArts] = useState([]);
     const [loader, setLoader] = useState(false);
+    const updateModalRef = useRef(null)
+    // const [formData, setFormData] = useState({});
+    const [selecArt, setSelecArt] = useState(null);
 
     useEffect(() => {
         if (!user?.email) return;
         setLoader(true);
-        fetch(`http://localhost:3000/artwork`)
+        fetch('http://localhost:3000/artwork')
             .then((res) => res.json())
             .then((data) => {
                 const myArts = data.filter((art) => art.userEmail === user.email);
@@ -21,8 +25,10 @@ const MyGallery = () => {
             });
     }, [user]);
 
-    const handleDelete = (_id) => {
 
+
+    // delete 
+    const handleDelete = (_id) => {
         Swal.fire({
             title: "Are you sure?",
             text: "You won't be able to revert this!",
@@ -44,7 +50,7 @@ const MyGallery = () => {
                                 text: "Your Artwork has been deleted.",
                                 icon: "success"
                             });
-                            const remainingArts =  arts.filter(art => art._id !== _id);
+                            const remainingArts = arts.filter(art => art._id !== _id);
                             setArts(remainingArts);
                         }
 
@@ -55,20 +61,105 @@ const MyGallery = () => {
         });
     };
 
-    const handleUpdate = (art) => {
-        Swal.fire({
-            title: "Edit Feature Coming Soon!",
-            text: `You selected: ${art.title}`,
-            icon: "info",
-        });
+
+
+
+    // update
+    const handleOpenModel = (art) => {
+        setSelecArt(art);
+        // console.log(selecArt);
+
+        updateModalRef.current.showModal();
     };
+
+    const handleUpdate = (e) => {
+        e.preventDefault();
+
+        const title = e.target.title.value;
+        const category = e.target.category.value;
+        const medium = e.target.medium.value;
+        const dimensions = e.target.dimensions.value;
+        const price = e.target.price.value;
+        const visibility = e.target.visibility.value;
+        const description = e.target.description.value;
+        const image = e.target.image.value;
+    
+        const newArt = {
+            image: image,
+            title: title,
+            dimensions: dimensions,
+            category: category,
+            medium: medium,
+            description: description,
+            price: price,
+            visibility: visibility,
+            userName: user?.displayName,
+            userEmail: user?.email,
+            createdAt: new Date()
+        }
+
+        // console.log(newArt);
+        fetch(`http://localhost:3000/artwork/${selecArt._id}`, {
+            method: "PUT",
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(newArt)
+        })
+            .then(res => res.json())
+            .then(data => {
+
+                if ( data.modifiedCount > 0) {
+                    updateModalRef.current.close();
+                    Swal.fire({
+                        position: "center",
+                        icon: "success",
+                        title: "Your artwork has been updated.",
+                        showConfirmButton: false,
+                        timer: 1800,
+                    });
+                    const updatedArts = arts.map(art =>
+                        art._id === selecArt._id ? { ...art, ...newArt } : art
+                    );
+
+                    setArts(updatedArts);
+                }
+
+            })
+            .catch(err => {
+                console.log(err.message);
+
+            })
+
+
+    }
+
+    // console.log(user);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     if (loader) return <Loader />;
 
     return (
         <div className="container mx-auto mt-10 px-3 sm:px-5">
-            <h3 className="text-4xl md:text-3xl font-semibold text-center mb-8 text-gray-800">
-                My Gallery ({arts.length})
+            <h3 className="text-4xl  font-bold text-center mb-8 text-indigo-600">My Gallery
+                <span> </span>
+                <span className="text-gray-800">({arts.length})</span>
             </h3>
 
             {arts.length === 0 ? (
@@ -135,7 +226,7 @@ const MyGallery = () => {
                                     <td className="py-3 sm:py-4 px-3 sm:px-5 text-center align-middle">
                                         <div className="flex justify-center sm:justify-center items-center gap-2 sm:gap-3 flex-wrap">
                                             <button
-                                                onClick={() => handleUpdate(art)}
+                                                onClick={() => handleOpenModel(art)}
                                                 className="flex items-center gap-1 text-[11px] sm:text-xs md:text-sm bg-gradient-to-r from-indigo-600  to-purple-500 text-white font-medium px-2 sm:px-3 py-1.5 rounded-lg transition-all duration-300 shadow-sm hover:shadow-lg transform hover:scale-105"
                                             >
                                                 <Pencil size={13} />
@@ -156,7 +247,26 @@ const MyGallery = () => {
                     </table>
                 </div>
             )}
+
+
+            <dialog ref={updateModalRef} className="modal modal-bottom sm:modal-middle">
+                <div className="modal-box">
+                    <h3 className="text-xl font-semibold text-indigo-600 mb-4">
+                        Update Artwork: <span className="text-gray-800">{selecArt?.title}</span>
+                        <div>
+                            {selecArt && (<Modal key={selecArt._id} handleUpdate={handleUpdate} art={selecArt}></Modal>)}
+                        </div>
+                    </h3>
+                    <div className="modal-action">
+                        <form method="dialog">
+
+                            <button className="btn flex items-center justify-end border-indigo-600 text-st">Cancel Update</button>
+                        </form>
+                    </div>
+                </div>
+            </dialog>
         </div>
+
     );
 };
 

@@ -1,217 +1,215 @@
 import React, { use, useState } from "react";
+import { Link, useNavigate } from "react-router";
 import { motion } from "framer-motion";
+import { FaUser, FaEnvelope, FaImage, FaLock } from "react-icons/fa";
 import { AuthContext } from "../Provider/AuthContext";
+import { FcGoogle } from "react-icons/fc";
 import { toast } from "react-toastify";
-import { FaImage, FaPalette, FaPenNib, FaDollarSign, FaEye } from "react-icons/fa";
+import { updateProfile } from "firebase/auth";
 
-const AddArtwork = () => {
-  const { user } = use(AuthContext);
-  const [loading, setLoading] = useState(false);
+const Register = () => {
+  const {signInWithGoogle ,setUser,createUser} = use(AuthContext)
+  const navigate = useNavigate();
+  const [passwordError, setPasswordError] = useState("");
 
-  const handleAddArtwork = async (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const artwork = {
-      imageUrl: form.imageUrl.value,
-      title: form.title.value,
-      category: form.category.value,
-      medium: form.medium.value,
-      description: form.description.value,
-      dimensions: form.dimensions.value,
-      price: form.price.value,
-      visibility: form.visibility.value,
-      userName: user?.displayName,
-      userEmail: user?.email,
-    };
 
-    try {
-      setLoading(true);
-      const res = await fetch("http://localhost:3000/artworks", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(artwork),
+
+
+
+   // googleSignIN
+  const handleGoogleSignIn = () => {
+    signInWithGoogle()
+      .then((result) => {
+        const loggedUser = result.user;
+        setUser(loggedUser);
+        // console.log(loggedUser);
+        toast.success("Logged in with Google");
+        navigate('/');
+      })
+      .catch((error) => {
+        toast.error(error.message);
+        console.log(error);
+
       });
-      if (res.ok) {
-        toast.success("Artwork added successfully!");
-        form.reset();
-      } else {
-        toast.error("Failed to add artwork");
-      }
-    } catch (error) {
-      toast.error(error.message);
-    } finally {
-      setLoading(false);
-    }
   };
 
+
+
+// register
+   const handleRegister = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const name = form.name.value;
+        const url = form.url.value;
+        const email = form.email.value;
+
+
+        // password authintication
+        const password = form.password.value;
+        if (password.length < 6) {
+            setPasswordError("Password must be at least 6 characters long.");
+            return;
+        }
+        if (!/[A-Z]/.test(password)) {
+            setPasswordError("Password must contain at least one uppercase letter.");
+            return;
+        }
+        if (!/[a-z]/.test(password)) {
+            setPasswordError("Password must contain at least one lowercase letter.");
+            return;
+        }
+
+        createUser(email, password)
+            .then((res) => {
+                const theuser = res.user;
+                updateProfile(theuser, {
+                    displayName: name,
+                    photoURL: url,
+                })
+                    .then(() => {
+                        setUser({
+                            ...theuser,
+                            displayName: name,
+                            photoURL: url,
+                        });
+                        
+                        // console.log(theuser);
+                        
+                        toast.success('Sign In successfully')
+                        navigate('/', { replace: true })
+                    })
+                    .catch((err) => {
+                        console.error("Profile update failed:", err);
+                    });
+                   e.target.reset(); 
+                    
+            })
+            .catch((error) => {
+                const errorMessage = error.message;
+                toast.error(errorMessage);
+
+            });
+
+          }
+
+
+
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gray-50 py-10">
+    <section className="min-h-screen flex items-center justify-center">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-2xl border border-gray-100"
+        className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md border border-gray-100"
       >
-        <h1 className="text-3xl font-bold text-indigo-600 mb-4 text-center">
-          Add New Artwork
+        {/* Header */}
+        <h1 className="text-4xl font-bold text-center text-indigo-600 mb-2">
+          Create an Account
         </h1>
-        <p className="text-gray-500 text-center mb-6">
-          Fill in the details to share your creativity with the world!
+        <p className="text-gray-500 text-center mb-8">
+          Join Artify and start sharing your creativity with the world!
         </p>
 
-        <form onSubmit={handleAddArtwork} className="space-y-5">
-
-          {/* Image URL */}
+        {/* Registration Form */}
+        <form onSubmit={handleRegister} className="space-y-5">
+          {/* Name */}
           <div className="flex flex-col">
-            <label className="text-sm font-medium text-gray-700 mb-1">Image URL</label>
+            <label className="text-sm font-medium text-gray-700 mb-1">Full Name</label>
+            <div className="relative">
+              <FaUser className="absolute left-3 top-3 text-gray-400" />
+              <input
+                required
+                name="name"
+                type="text"
+                placeholder="Enter your full name"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-400 bg-white/70"
+              />
+            </div>
+          </div>
+
+          {/* Email */}
+          <div className="flex flex-col">
+            <label className="text-sm font-medium text-gray-700 mb-1">Email Address</label>
+            <div className="relative">
+              <FaEnvelope className="absolute left-3 top-3 text-gray-400" />
+              <input
+                required
+                name="email"
+                type="email"
+                placeholder="Enter your email"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-400 bg-white/70"
+              />
+            </div>
+          </div>
+
+          {/* Photo URL */}
+          <div className="flex flex-col">
+            <label className="text-sm font-medium text-gray-700 mb-1">Photo URL</label>
             <div className="relative">
               <FaImage className="absolute left-3 top-3 text-gray-400" />
               <input
                 required
-                name="imageUrl"
+                name="url"
                 type="text"
-                placeholder="Paste image URL"
-                className="w-full pl-10 pr-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/70"
+                placeholder="Paste your profile photo URL"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-sky-400 bg-white/70"
               />
             </div>
           </div>
 
-          {/* Title */}
+          {/* Password */}
           <div className="flex flex-col">
-            <label className="text-sm font-medium text-gray-700 mb-1">Title</label>
+            <label className="text-sm font-medium text-gray-700 mb-1">Password</label>
             <div className="relative">
-              <FaPenNib className="absolute left-3 top-3 text-gray-400" />
+              <FaLock className="absolute left-3 top-3 text-gray-400" />
               <input
                 required
-                name="title"
-                type="text"
-                placeholder="Artwork title"
-                className="w-full pl-10 pr-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/70"
+                name="password"
+                type="password"
+                placeholder="Enter your password"
+                className={`w-full pl-10 pr-4 py-2 border rounded-xl focus:outline-none focus:ring-2 ${passwordError ? "border-red-400 focus:ring-red-300" : "border-gray-300 focus:ring-sky-400"
+                  } bg-white/70 transition-all`}
               />
             </div>
+            {passwordError && <p className="text-red-500 text-sm mt-1">{passwordError}</p>}
           </div>
 
-          {/* Category */}
-          <div className="flex flex-col">
-            <label className="text-sm font-medium text-gray-700 mb-1">Category</label>
-            <select
-              name="category"
-              className="w-full pl-3 pr-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/70"
-              required
-            >
-              <option value="">Select category</option>
-              <option value="Painting">Painting</option>
-              <option value="Digital">Digital</option>
-              <option value="Sculpture">Sculpture</option>
-              <option value="Photography">Photography</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-
-          {/* Medium */}
-          <div className="flex flex-col">
-            <label className="text-sm font-medium text-gray-700 mb-1">Medium/Tools</label>
-            <div className="relative">
-              <FaPalette className="absolute left-3 top-3 text-gray-400" />
-              <input
-                required
-                name="medium"
-                type="text"
-                placeholder="E.g. Oil on Canvas, Photoshop"
-                className="w-full pl-10 pr-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/70"
-              />
-            </div>
-          </div>
-
-          {/* Description */}
-          <div className="flex flex-col">
-            <label className="text-sm font-medium text-gray-700 mb-1">Description</label>
-            <textarea
-              required
-              name="description"
-              rows={4}
-              placeholder="Describe your artwork..."
-              className="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/70 resize-none"
-            />
-          </div>
-
-          {/* Dimensions */}
-          <div className="flex flex-col">
-            <label className="text-sm font-medium text-gray-700 mb-1">Dimensions (Optional)</label>
-            <input
-              name="dimensions"
-              type="text"
-              placeholder="E.g. 24 x 36 inches"
-              className="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/70"
-            />
-          </div>
-
-          {/* Price */}
-          <div className="flex flex-col">
-            <label className="text-sm font-medium text-gray-700 mb-1">Price (Optional)</label>
-            <div className="relative">
-              <FaDollarSign className="absolute left-3 top-3 text-gray-400" />
-              <input
-                name="price"
-                type="number"
-                placeholder="E.g. 200"
-                className="w-full pl-10 pr-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/70"
-              />
-            </div>
-          </div>
-
-          {/* Visibility */}
-          <div className="flex flex-col">
-            <label className="text-sm font-medium text-gray-700 mb-1">Visibility</label>
-            <div className="relative">
-              <FaEye className="absolute left-3 top-3 text-gray-400" />
-              <select
-                name="visibility"
-                className="w-full pl-10 pr-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-400 bg-white/70"
-                required
-              >
-                <option value="Public">Public</option>
-                <option value="Private">Private</option>
-              </select>
-            </div>
-          </div>
-
-          {/* User Name */}
-          <div className="flex flex-col">
-            <label className="text-sm font-medium text-gray-700 mb-1">Your Name</label>
-            <input
-              type="text"
-              value={user?.displayName || ""}
-              readOnly
-              className="w-full px-4 py-2 border rounded-xl bg-gray-100 cursor-not-allowed"
-            />
-          </div>
-
-          {/* User Email */}
-          <div className="flex flex-col">
-            <label className="text-sm font-medium text-gray-700 mb-1">Your Email</label>
-            <input
-              type="text"
-              value={user?.email || ""}
-              readOnly
-              className="w-full px-4 py-2 border rounded-xl bg-gray-100 cursor-not-allowed"
-            />
-          </div>
-
-          {/* Submit */}
+          {/* Register Button */}
           <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            type="submit"
-            disabled={loading}
-            className="w-full btn btn-st text-white hover:bg-indigo-700 font-semibold rounded-lg shadow-md transition-all flex items-center justify-center gap-2"
-          >
-            {loading ? "Adding..." : "Add Artwork"}
-          </motion.button>
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        type="submit"
+                        className="w-full btn btn-st flex items-center justify-center gap-x-1.5 hover:bg-indigo-700 text-white font-semibold rounded-lg shadow-md transition-all"
+                    >
+                        Register Now
+                    </motion.button>
         </form>
+
+        {/* Login Link */}
+        <div className="divider my-4 text-gray-400">OR</div>
+
+        {/* <!-- Google --> */}
+        <button
+          onClick={handleGoogleSignIn}
+          className="flex items-center justify-center gap-2 w-full py-2 border border-purple-500 rounded-md bg-white text-st hover:bg-gray-100 transition"
+        >
+          <FcGoogle size={22} />
+          <span className=" font-medium">Continue with Google</span>
+        </button>
+
+        {/* Register Link */}
+        <p className="text-center mt-4 text-sm text-gray-600 ">
+          <span className="italic"> Already have an account?{"  "}</span>
+          <Link
+            to={"/auth/login"}
+            className="text-indigo-500 underline font-medium transition-colors duration-300"
+          >
+            Login here
+          </Link>
+        </p>
       </motion.div>
     </section>
   );
 };
 
-export default AddArtwork;
+export default Register;

@@ -13,7 +13,7 @@ const FeaturedArtworks = () => {
             .then((res) => res.json())
             .then((data) => {
                 setArtworks(data)
-                console.log(data);
+                // console.log(data);
                 setLoading(false);
                 
             })
