@@ -110,7 +110,7 @@ const ExploreArtworks = () => {
                       className="w-full h-64 object-cover rounded-2xl transition-all duration-700 ease-in-out group-hover:scale-110 group-hover:brightness-110"
                     />
 
-                    {/* Hover Overlay */}
+                    {/* Hover */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-90 transition-opacity duration-700 flex items-end justify-center pb-1">
                       <p
                         className="text-white italic text-xs bg-indigo-600/80 px-3 py-1 rounded-full  hover:bg-indigo-700 transition"

@@ -51,7 +51,6 @@ const FeaturedArtworks = () => {
                            group-hover:scale-110 group-hover:brightness-110"
               />
 
-              {/* Hover Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent 
                               opacity-0 group-hover:opacity-90 transition-opacity duration-700 flex items-end justify-center pb-1">
                 <p
@@ -87,14 +86,13 @@ const FeaturedArtworks = () => {
               </h3>
 
 
-              {/* Description (short preview) */}
+              
               {item.description && (
                 <p className="text-sm font-light text-gray-500 line-clamp-2">
                   {item.description.slice(0, 80)}...
                 </p>
               )}
 
-              {/* Price & Visibility */}
               <div className="flex items-center justify-between text-sm text-gray-700 mt-3">
                 <p className="font-semibold text-indigo-700 text-lg">${item.price}</p>
                 <span

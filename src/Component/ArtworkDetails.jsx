@@ -30,6 +30,8 @@ const ArtworkDetails = () => {
 
 
 
+
+const [likesCount, setLikesCount] = useState(likes || 0);
     useEffect(() => {
         if (user?.email && _id) {
             setLoading(true)
@@ -46,7 +48,7 @@ const ArtworkDetails = () => {
 
                 })
                 .finally(() => {
-                    setLoading(false); 
+                    setLoading(false);
                 });
         }
 
@@ -65,9 +67,10 @@ const ArtworkDetails = () => {
 
 
 
-       const handleLike = (id) => {
-        console.log(id);
-        setLiked(true); 
+
+
+    const handleLike = (id) => {
+        setLiked(true);
         fetch(`https://artify-server-nine.vercel.app/artwork/${id}/like`, {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
@@ -75,13 +78,15 @@ const ArtworkDetails = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
-                
-                if(data.success === true){
+                // console.log(data);
+
+                if (data.success === true) {
                     toast.success("You liked this artwork!");
+                    setLikesCount((prev) => prev + 1);
                 }
-                else{
+                else {
                     toast(data.message);
+                    setLikesCount((prev) => prev + 1);
                 }
             })
             .catch(err => toast.error(err.message));
@@ -118,7 +123,7 @@ const ArtworkDetails = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 if (data.success && data?.result?.insertedId) {
                     Swal.fire({
                         position: "center",
@@ -136,7 +141,7 @@ const ArtworkDetails = () => {
             })
             .catch(err => {
                 toast.error(err.message)
-                console.log(err);
+                // console.log(err);
 
             })
 
@@ -199,7 +204,7 @@ const ArtworkDetails = () => {
                     <div className="flex items-center justify-center gap-4 mt-6">
                         <motion.button
                             whileTap={{ scale: 1.2 }}
-                            onClick={()=>handleLike(_id)}
+                            onClick={() => handleLike(_id)}
                             className="flex items-center gap-2 px-5 py-2 rounded-full bg-pink-200 hover:bg-pink-300 transition-all"
                         >
                             {liked ? (
@@ -207,8 +212,8 @@ const ArtworkDetails = () => {
                             ) : (
                                 <FaRegHeart className="text-gray-400" />
                             )}
-                            <span className="">{likes}</span>
-                            
+                            <span className="">{likesCount}</span>
+
                         </motion.button>
 
                         <motion.button

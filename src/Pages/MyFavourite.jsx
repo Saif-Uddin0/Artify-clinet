@@ -15,9 +15,9 @@ const MyFavourite = () => {
             fetch('https://artify-server-nine.vercel.app/favourite')
                 .then(res => res.json())
                 .then(data => {
-                    console.log(data);
+                    // console.log(data);
                     const favoriteFilter = data.filter(fav => fav.userEmail === user.email)
-                    console.log(favoriteFilter);
+                    // console.log(favoriteFilter);
                     setFavourite(favoriteFilter)
                 })
                 .catch(err => {
@@ -37,13 +37,13 @@ const MyFavourite = () => {
 
 
     const handleUnfav = (_id) => {
-        console.log(_id);
+        // console.log(_id);
         fetch(`https://artify-server-nine.vercel.app/favourite/${_id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
 
                 if (data.deletedCount > 0) {
                     toast.success('Remove from Favourite');

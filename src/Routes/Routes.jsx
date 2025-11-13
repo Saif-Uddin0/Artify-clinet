@@ -12,6 +12,7 @@ import AddArtwork from "../Pages/AddArtWork";
 import ExploreArtworks from "../Pages/ExploreArtWorks";
 import MyGallery from "../Pages/MyGallery";
 import MyFavourite from "../Pages/MyFavourite";
+import Loader from "../Component/Shared/Loader";
 
 
 
@@ -54,6 +55,7 @@ export const router = createBrowserRouter([
                         <ArtworkDetails></ArtworkDetails>
                     </PrivateRoutes>,
                 loader: ({ params }) => fetch(`https://artify-server-nine.vercel.app/artwork-details/${params.id}`),
+                hydrateFallbackElement: <Loader></Loader>
             }
         ]
 

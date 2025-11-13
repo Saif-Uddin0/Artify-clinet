@@ -28,7 +28,7 @@ const Register = () => {
       })
       .catch((error) => {
         toast.error(error.message);
-        console.log(error);
+        // console.log(error);
 
       });
   };
@@ -79,7 +79,7 @@ const Register = () => {
                         navigate('/', { replace: true })
                     })
                     .catch((err) => {
-                        console.error("Profile update failed:", err);
+                        toast.error("Profile update failed:", err);
                     });
                    e.target.reset(); 
                     

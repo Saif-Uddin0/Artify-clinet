@@ -12,7 +12,7 @@ const AuthPorvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
-console.log(user);
+// console.log(user);
 
     // register a new User
     const createUser = (email, password) => {

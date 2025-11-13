@@ -22,13 +22,13 @@ const Login = () => {
             .then((result) => {
                 const loggedUser = result.user;
                 setUser(loggedUser);
-                console.log(loggedUser);
+                // console.log(loggedUser);
                 toast.success("Logged in with Google");
                 navigate(from,{replace: true});
             })
             .catch((error) => {
                 toast.error(error.message);
-                console.log(error);
+                // console.log(error);
 
             });
     };
@@ -41,13 +41,13 @@ const Login = () => {
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email, password);
+        // console.log(email, password);
         signInUser(email, password)
             .then((res) => {
                 const UserIn = res.user
                 setUser(UserIn);
                 toast.success('Log in successfully')
-                console.log(UserIn);
+                // console.log(UserIn);
                 navigate(from,{replace: true});
 
             })

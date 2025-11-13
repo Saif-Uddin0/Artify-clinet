@@ -207,7 +207,7 @@ const MyGallery = () => {
                                             <p className="text-[10px] sm:text-xs text-gray-500">
                                                 {art.dimensions}
                                             </p>
-                                            {/* Hidden fields for mobile view */}
+                                            
                                             <p className="text-[11px] text-gray-500 block md:hidden">
                                                 {art.category}
                                             </p>

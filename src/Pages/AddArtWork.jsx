@@ -34,7 +34,7 @@ const AddArtwork = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 Swal.fire({
                     position: "center",
                     icon: "success",
@@ -69,7 +69,7 @@ const AddArtwork = () => {
 
                 <form onSubmit={handleAddArtwork} className="space-y-5">
 
-                    {/* Image URL */}
+                    {/* Image */}
                     <div className="flex flex-col">
                         <label className="text-sm font-medium text-gray-700 mb-1">Image URL</label>
                         <div className="relative">
