@@ -29,7 +29,7 @@ const Navbar = () => {
         <NavLink
           to="/"
           className={({ isActive }) =>
-            `px-4 py-2 rounded-md sm:font-semibold sm:text-white transition-all duration-300 flex items-center justify-center gap-1 ${isActive
+            `px-4 py-2 rounded-md sm:font-semibold text-white transition-all duration-300 flex items-center justify-center gap-1 ${isActive
               ? "text-st font-semibold border-b border-white"
               : "hover:text-indigo-500"
             }`
@@ -42,7 +42,7 @@ const Navbar = () => {
         <NavLink
           to="/explore-art"
           className={({ isActive }) =>
-            `px-4 py-2 sm:font-semibold sm:text-white flex items-center justify-center gap-1  rounded-md transition-all duration-300 ${isActive
+            `px-4 py-2 sm:font-semibold text-white flex items-center justify-center gap-1  rounded-md transition-all duration-300 ${isActive
               ? "text-st font-semibold border-b border-white"
               : "hover:text-indigo-500"
             }`
@@ -61,7 +61,7 @@ const Navbar = () => {
             <NavLink
               to="/add-art"
               className={({ isActive }) =>
-                `px-4 py-2 sm:font-semibold sm:text-white flex items-center justify-center gap-1 rounded-md transition-all duration-300 ${isActive
+                `px-4 py-2 sm:font-semibold text-white flex items-center justify-center gap-1 rounded-md transition-all duration-300 ${isActive
                   ? "text-st font-semibold border-b border-white"
                   : "hover:text-indigo-500"
                 }`
@@ -74,7 +74,7 @@ const Navbar = () => {
             <NavLink
               to="/my-gallery"
               className={({ isActive }) =>
-                `px-4 py-2 sm:font-semibold sm:text-white flex items-center justify-center gap-1 rounded-md transition-all duration-300 ${isActive
+                `px-4 py-2 sm:font-semibold text-white flex items-center justify-center gap-1 rounded-md transition-all duration-300 ${isActive
                   ? "text-st font-semibold border-b border-white"
                   : "hover:text-indigo-500"
                 }`
@@ -87,7 +87,7 @@ const Navbar = () => {
             <NavLink
               to="/my-favorite"
               className={({ isActive }) =>
-                `px-4 py-2 sm:font-semibold sm:text-white flex items-center justify-center gap-1 rounded-md transition-all duration-300 ${isActive
+                `px-4 py-2 sm:font-semibold text-white flex items-center justify-center gap-1 rounded-md transition-all duration-300 ${isActive
                   ? "text-st font-semibold border-b border-white"
                   : "hover:text-indigo-500"
                 }`
