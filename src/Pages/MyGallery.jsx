@@ -16,7 +16,7 @@ const MyGallery = () => {
     useEffect(() => {
         if (!user?.email) return;
         setLoader(true);
-        fetch(`http://localhost:3000/artwork`)
+        fetch(`https://artify-server-nine.vercel.app/artwork`)
             .then((res) => res.json())
             .then((data) => {
                 const myArts = data.filter((art) => art.userEmail === user.email);
@@ -40,7 +40,7 @@ const MyGallery = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:3000/artwork/${_id}`, {
+                fetch(`https://artify-server-nine.vercel.app/artwork/${_id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())
@@ -100,7 +100,7 @@ const MyGallery = () => {
         }
 
         // console.log(newArt);
-        fetch(`http://localhost:3000/artwork/${selecArt._id}`, {
+        fetch(`https://artify-server-nine.vercel.app/artwork/${selecArt._id}`, {
             method: "PUT",
             headers: {
                 'content-type': 'application/json'

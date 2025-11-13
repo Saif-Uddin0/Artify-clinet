@@ -33,7 +33,7 @@ const ArtworkDetails = () => {
     useEffect(() => {
         if (user?.email && _id) {
             setLoading(true)
-            fetch(`http://localhost:3000/favourite/check?userEmail=${user?.email}&artworkId=${_id}`)
+            fetch(`https://artify-server-nine.vercel.app/favourite/check?userEmail=${user?.email}&artworkId=${_id}`)
                 .then(res => res.json())
                 .then(data => {
                     if (data.isExists) {
@@ -67,7 +67,8 @@ const ArtworkDetails = () => {
 
        const handleLike = (id) => {
         console.log(id);
-        fetch(`http://localhost:3000/artwork/${id}/like`, {
+        setLiked(true); 
+        fetch(`https://artify-server-nine.vercel.app/artwork/${id}/like`, {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ userEmail: user?.email })
@@ -75,12 +76,12 @@ const ArtworkDetails = () => {
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-                if(data.success == "true"){
+                
+                if(data.success === true){
                     toast.success("You liked this artwork!");
-                    setLiked(true); 
                 }
                 else{
-                    toast.error(data.message);
+                    toast(data.message);
                 }
             })
             .catch(err => toast.error(err.message));
@@ -108,7 +109,7 @@ const ArtworkDetails = () => {
             userEmail: user?.email,
         };
         // console.log(favoriteData);
-        fetch('http://localhost:3000/favourite', {
+        fetch('https://artify-server-nine.vercel.app/favourite', {
             method: 'POST',
             headers: {
                 'Content-Type': "application/json"
@@ -199,7 +200,7 @@ const ArtworkDetails = () => {
                         <motion.button
                             whileTap={{ scale: 1.2 }}
                             onClick={()=>handleLike(_id)}
-                            className="flex items-center gap-2 px-5 py-2 rounded-full bg-pink-100 hover:bg-pink-200 transition-all"
+                            className="flex items-center gap-2 px-5 py-2 rounded-full bg-pink-200 hover:bg-pink-300 transition-all"
                         >
                             {liked ? (
                                 <FaHeart className="text-red-500" />

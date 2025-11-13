@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router";
 import { toast } from "react-toastify";
+import { motion } from "framer-motion";
 import { ArrowRight, Heart, Search, X } from "lucide-react";
 import Loader from "../Component/Shared/Loader";
+import { FaRegHeart } from "react-icons/fa";
 
 const ExploreArtworks = () => {
   const [artworks, setArtworks] = useState([]);
@@ -14,7 +16,7 @@ const ExploreArtworks = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch("http://localhost:3000/artwork")
+    fetch("https://artify-server-nine.vercel.app/artwork")
       .then((res) => res.json())
       .then((data) => {
         setArtworks(data);
@@ -156,18 +158,29 @@ const ExploreArtworks = () => {
 
 
 
-
+                    <div className="flex items-center justify-between gap-2">
+                      <motion.button
+                            whileTap={{ scale: 1.2 }}
+                            className="flex items-center justify-center gap-2 px-3 py-2 rounded-full bg-pink-100  transition-all"
+                        >
+                                <FaRegHeart className="text-gray-400" />
+                                 <span className="">{item.likes}</span>
+                            
+                        </motion.button>
 
                       <Link
                         to={`/artwork-details/${item._id}`}
-                        className="group  flex items-end justify-center  gap-2 hover:scale-105 transition-all duration-500 btn btn-st overflow-hidden "
+                        className="group  flex items-center justify-center  gap-1.5 hover:scale-105 transition-all duration-500  btn-st overflow-hidden "
                       >
-                        <span className="transition-all duration-700 ease-in-out group-hover:translate-x-4">
+                        <span className="transition-all duration-700 ease-in-out group-hover:translate-x-3">
                           View Details
                         </span>
-                        <ArrowRight size={22} className="transition-all duration-700 ease-in-out group-hover:-translate-x-27" />
+                        <ArrowRight size={20} className="transition-all duration-700 ease-in-out group-hover:-translate-x-28" />
                       </Link>
-                    
+                    </div>
+
+
+
 
 
 

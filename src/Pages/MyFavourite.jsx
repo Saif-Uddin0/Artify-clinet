@@ -12,7 +12,7 @@ const MyFavourite = () => {
     useEffect(() => {
         if (user) {
             setLoading(true);
-            fetch('http://localhost:3000/favourite')
+            fetch('https://artify-server-nine.vercel.app/favourite')
                 .then(res => res.json())
                 .then(data => {
                     console.log(data);
@@ -38,7 +38,7 @@ const MyFavourite = () => {
 
     const handleUnfav = (_id) => {
         console.log(_id);
-        fetch(`http://localhost:3000/favourite/${_id}`, {
+        fetch(`https://artify-server-nine.vercel.app/favourite/${_id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())

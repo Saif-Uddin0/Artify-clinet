@@ -9,7 +9,7 @@ const FeaturedArtworks = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch("http://localhost:3000/feauters-artwork")
+    fetch("https://artify-server-nine.vercel.app/feauters-artwork")
       .then((res) => res.json())
       .then((data) => {
         setArtworks(data);
