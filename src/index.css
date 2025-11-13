@@ -1,15 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import "tailwindcss";
-@plugin "daisyui";
-@plugin "daisyui/theme" {
-  name: "light";
-  default: true;
-  --color-primary: #1696fd;
-  --color-secondary: #D72050;
-  --color-base-200: #F3F3F3;
-  --color-base-300: #E7E7E7;
-  --color-accent: #706F6F;
+@plugin "daisyui" {
+  themes: light --default, dark --prefersdark;
 }
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 *{
   font-family:"Poppins", sans-serif ;
@@ -17,10 +12,10 @@
 
 
 .btn-st {
-  @apply hover:bg-gradient-to-r hover:from-indigo-500 hover:via-purple-500 hover:to-purple-600  font-semibold rounded-md px-5 py-2 transition-all duration-300 text-white bg-gradient-to-r  from-purple-500 via-purple-600 to-indigo-500  hover:shadow-md;
+  @apply hover:bg-gradient-to-r hover:from-indigo-500 hover:via-purple-500 hover:to-purple-600  font-semibold rounded-md px-5 py-2 transition-all duration-300 text-white bg-gradient-to-r  from-purple-800 via-purple-600 to-indigo-600  hover:shadow-md;
 }
 .text-st {
-  @apply bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 
+  @apply bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 
          hover:bg-gradient-to-r hover:from-pink-500 hover:via-indigo-500 
          bg-clip-text text-transparent;
 }

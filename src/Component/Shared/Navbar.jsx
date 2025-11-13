@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { use, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router';
 import { AuthContext } from '../../Provider/AuthContext';
 import { toast } from 'react-toastify';
@@ -9,34 +9,51 @@ import { BookImage, BookmarkPlus, Earth, House, LogOut, Star } from "lucide-reac
 const Navbar = () => {
   const { user, logOut } = use(AuthContext)
   const [isHovered, setIsHovered] = useState(false);
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || "light")
+
+  useEffect(() => {
+    const html = document.querySelector('html')
+    html.setAttribute("data-theme", theme)
+    localStorage.setItem("theme", theme)
+  }, [theme])
+
+  const handleTheme = (checked) => {
+    setTheme(checked ? "dark" : "light")
+
+  }
+
+
   const navLinks = (
     <>
-      <li>
+      <li >
         <NavLink
           to="/"
           className={({ isActive }) =>
-            `px-4 py-2 rounded-md sm:font-semibold sm:text-gray-600 transition-all duration-300 ${isActive
-              ? "text-st font-semibold border-b-2 border-indigo-600"
+            `px-4 py-2 rounded-md sm:font-semibold sm:text-white transition-all duration-300 flex items-center justify-center gap-1 ${isActive
+              ? "text-st font-semibold border-b border-white"
               : "hover:text-indigo-500"
             }`
           }
         >
-          <House color="black" size={16}/>Home
+          <House color="white" size={16} />Home
         </NavLink>
       </li>
       <li>
         <NavLink
           to="/explore-art"
           className={({ isActive }) =>
-            `px-4 py-2 sm:font-semibold sm:text-gray-600  rounded-md transition-all duration-300 ${isActive
-              ? "text-st font-semibold border-b-2 border-indigo-600"
+            `px-4 py-2 sm:font-semibold sm:text-white flex items-center justify-center gap-1  rounded-md transition-all duration-300 ${isActive
+              ? "text-st font-semibold border-b border-white"
               : "hover:text-indigo-500"
             }`
           }
         >
-          <Earth color="black" size={16}/>Explore Artworks
+          <Earth color="white" size={16} />Explore Artworks
         </NavLink>
       </li>
+
+
+
 
       {
         user && <>
@@ -44,50 +61,44 @@ const Navbar = () => {
             <NavLink
               to="/add-art"
               className={({ isActive }) =>
-                `px-4 py-2 sm:font-semibold sm:text-gray-600 rounded-md transition-all duration-300 ${isActive
-                  ? "text-st font-semibold border-b-2 border-indigo-600"
+                `px-4 py-2 sm:font-semibold sm:text-white flex items-center justify-center gap-1 rounded-md transition-all duration-300 ${isActive
+                  ? "text-st font-semibold border-b border-white"
                   : "hover:text-indigo-500"
                 }`
               }
             >
-              <BookmarkPlus color="black" size={16} />Add Artwork
+              <BookmarkPlus color="white" size={16} />Add Artwork
             </NavLink>
           </li>
           <li>
             <NavLink
               to="/my-gallery"
               className={({ isActive }) =>
-                `px-4 py-2 sm:font-semibold sm:text-gray-600 rounded-md transition-all duration-300 ${isActive
-                  ? "text-st font-semibold border-b-2 border-indigo-600"
+                `px-4 py-2 sm:font-semibold sm:text-white flex items-center justify-center gap-1 rounded-md transition-all duration-300 ${isActive
+                  ? "text-st font-semibold border-b border-white"
                   : "hover:text-indigo-500"
                 }`
               }
             >
-              <BookImage color="black" size={16} />My Gallery
+              <BookImage color="white" size={16} />My Gallery
             </NavLink>
           </li>
           <li>
             <NavLink
               to="/my-favorite"
               className={({ isActive }) =>
-                `px-4 py-2 sm:font-semibold sm:text-gray-600 rounded-md transition-all duration-300 ${isActive
-                  ? "text-st font-semibold border-b-2 border-indigo-600"
+                `px-4 py-2 sm:font-semibold sm:text-white flex items-center justify-center gap-1 rounded-md transition-all duration-300 ${isActive
+                  ? "text-st font-semibold border-b border-white"
                   : "hover:text-indigo-500"
                 }`
               }
             >
-             <Star color="black" size={16} /> My Favorites
+              <Star color="white" size={16} /> My Favorites
             </NavLink>
           </li>
 
         </>
       }
-
-
-
-
-
-
     </>
   );
 
@@ -107,22 +118,23 @@ const Navbar = () => {
   }
 
   return (
-    <div className='bg-gradient-to-r from-gray-50 to-gray-100 w-full border-b border-gray-100'>
-      <div className="navbar container md:w-11/12 mx-auto">
-        <div className=" navbar-start ">
+    <div className='bg-indigo-600 w-full '>
+      <div className="navbar container md:max-w-full xl:container mx-auto">
+        <div className=" navbar-start space-x-5">
           <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn flex items-center justify-center btn-ghost lg:hidden text-indigo-500">
+            <div tabIndex={0} role="button" className=" flex items-center justify-center btn-ghost lg:hidden text-white">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
             </div>
             <ul
               tabIndex="-1"
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-50 p-2 shadow">
+              className="menu menu-sm dropdown-content bg-black  rounded-box z-1 mt-3 w-50 p-2 shadow">
               {navLinks}
             </ul>
+
           </div>
           <div>
             <Link to={'/'}
-              className="btn btn-ghost text-lg  sm:text-2xl font-extrabold text-st"
+              className="btn-ghost text-lg  sm:text-2xl font-extrabold text-white"
             >
               ARTIFY
             </Link>
@@ -130,11 +142,52 @@ const Navbar = () => {
 
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1 flex gap-5 font-medium text-gray-800">
+          <ul className="flex items-center justify-center px-1 gap-2 font-medium text-gray-800">
             {navLinks}
           </ul>
         </div>
-        <div className="navbar-end flex items-center gap-3">
+
+
+
+
+        <div className="navbar-end flex items-center gap-2">
+          {/* theme */}
+          <ul>
+            <li>
+              <label className="flex cursor-pointer gap-2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="white"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="5" />
+                  <path
+                    d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" />
+                </svg>
+                <input type="checkbox"
+                onChange={(e) => handleTheme(e.target.checked)}
+                 defaultChecked={localStorage.getItem('theme') === "dark"}
+                  className="toggle theme-controller" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="black"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+              </label>
+            </li>
+          </ul>
           {user ? (
             <div
               className="relative"
@@ -142,7 +195,7 @@ const Navbar = () => {
               onMouseLeave={() => setIsHovered(false)}
             >
               <img
-                className="w-11 h-11 rounded-full border-2 border-indigo-500 shadow-md cursor-pointer hover:scale-105 transition-transform duration-300 "
+                className="w-11 h-11 rounded-full border border-white/40 shadow-md cursor-pointer hover:scale-105 transition-transform duration-300 "
                 src={user.photoURL || "https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg"}
 
               />
@@ -160,7 +213,7 @@ const Navbar = () => {
                       <img
                         src={user.photoURL || "https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg"}
                         alt="profile"
-                        className="w-12 h-12 rounded-full border-2 border-indigo-400 shadow-sm object-contain"
+                        className="w-12 h-12 rounded-full border-2 border-white shadow-sm object-contain"
                       />
                       <p className="font-semibold text-gray-800 text-sm text-center">
                         {user.displayName || "Anonymous User"}

@@ -2,7 +2,7 @@
   {
     "image": "https://afremov.com/media/catalog/product/3007_SUNSET_DREAMS.jpg",
     "title": "Sunset Dreams",
-    "category": "Digital Art",
+    "category": "Digital",
     "medium": "Procreate",
     "description": "A vibrant digital painting of an ocean sunset blended with warm hues.",
     "dimensions": "1080x1350",
@@ -28,7 +28,7 @@
   {
     "image": "https://img.freepik.com/free-vector/colorful-flow-background_52683-43164.jpg?semt=ais_hybrid&w=740&q=80",
     "title": "Abstract Flow",
-    "category": "Acrylic Painting",
+    "category": "Painting",
     "medium": "Acrylic on canvas",
     "description": "Abstract colors blending in fluid motion symbolizing human emotions.",
     "price": 200,
@@ -40,7 +40,7 @@
   {
     "image": "https://images.unsplash.com/photo-1495562569060-2eec283d3391?auto=format&fit=crop&w=800&q=80",
     "title": "Urban Vibes",
-    "category": "Street Photography",
+    "category": "Photography",
     "medium": "Sony A7III",
     "description": "A street snapshot capturing the raw beauty of urban life.",
     "dimensions": "3500x5000",
@@ -53,7 +53,7 @@
   {
     "image": "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80",
     "title": "Mountain Serenity",
-    "category": "Landscape Photography",
+    "category": "Photography",
     "medium": "Nikon D850",
     "description": "A peaceful moment in the mountains with mist covering the peaks.",
     "dimensions": "5000x3500",
@@ -66,7 +66,7 @@
   {
     "image": "https://images.unsplash.com/photo-1526312426976-f4d754fa9bd6?auto=format&fit=crop&w=800&q=80",
     "title": "Color Splash Portrait",
-    "category": "Portrait",
+    "category": "Photography",
     "medium": "Photoshop",
     "description": "Digital portrait enhanced with artistic color splash effects.",
     "price": 70,
@@ -166,7 +166,7 @@
   {
     "image": "https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?auto=format&fit=crop&w=800&q=80",
     "title": "Silent Waves",
-    "category": "Nature Art",
+    "category": "Painting",
     "medium": "Ink & Watercolor",
     "description": "Delicate waves painted in minimalist style, calm and serene.",
     "dimensions": "3500x3500",
@@ -179,7 +179,7 @@
   {
     "image": "https://images.unsplash.com/photo-1481277542470-605612bd2d61?auto=format&fit=crop&w=800&q=80",
     "title": "Colorful Horizons",
-    "category": "Acrylic Painting",
+    "category": "Painting",
     "medium": "Acrylic on Canvas",
     "description": "Vivid and energetic horizon painting with warm and cool color contrasts.",
     "dimensions": "1200x900",

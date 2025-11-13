@@ -84,7 +84,7 @@ const MyGallery = () => {
         const visibility = e.target.visibility.value;
         const description = e.target.description.value;
         const image = e.target.image.value;
-    
+
         const newArt = {
             image: image,
             title: title,
@@ -110,7 +110,7 @@ const MyGallery = () => {
             .then(res => res.json())
             .then(data => {
 
-                if ( data.modifiedCount > 0) {
+                if (data.modifiedCount > 0) {
                     updateModalRef.current.close();
                     Swal.fire({
                         position: "center",
@@ -252,7 +252,8 @@ const MyGallery = () => {
 
 
             <dialog ref={updateModalRef} className="modal modal-bottom sm:modal-middle">
-                <div className="modal-box">
+                <div className="modal-box bg-gradient-to-br from-pink-300/10 via-purple-300/10 to-blue-300/10
+                      backdrop-blur-xl">
                     <h3 className="text-xl font-semibold text-indigo-600 mb-4">
                         Update Artwork: <span className="text-gray-800">{selecArt?.title}</span>
                         <div>

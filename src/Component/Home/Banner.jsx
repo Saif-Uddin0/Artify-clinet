@@ -1,6 +1,7 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Fade } from "react-awesome-reveal";
 import { Link } from "react-router";
+import { Typewriter } from "react-simple-typewriter";
 
 const slides = [
   {
@@ -38,15 +39,25 @@ const Banner = () => {
   const currentSlide = slides[currentIndex];
 
   return (
-    <div className="w-full bg-gradient-to-r from-gray-50 to-gray-100">
-      <div className="container mx-auto px-6 py-15 flex flex-col md:flex-row items-center gap-10">
-        
+    <div className="w-full bg-indigo-600 px-6 py-15
+    rounded-bl-md rounded-br-md">
+      <div className="container mx-auto p-10 rounded-2xl flex flex-col md:flex-row bg-white items-center gap-10">
+
         {/* Left Text */}
         <div className="md:w-1/2">
-          <Fade cascade damping={0.3} direction="up" triggerOnce key={currentIndex}>
-            <h2 className="text-3xl md:text-5xl font-bold text-indigo-600 mb-4">
-              {currentSlide.title}
+          <Fade cascade damping={0.4} direction="up" triggerOnce key={currentIndex}>
+            <h2 className="text-3xl xl:text-5xl font-bold text-indigo-600 mb-4">
+              <Typewriter
+              words={[currentSlide.title]}
+              loop={false}
+              cursor
+              cursorStyle="|"
+              typeSpeed={90}
+              deleteSpeed={30}
+              delaySpeed={1000}
+            ></Typewriter>
             </h2>
+            
             <p className="text-gray-500 mb-6">{currentSlide.subtitle}</p>
             <Link
               to="/explore-art"
@@ -62,7 +73,7 @@ const Banner = () => {
           <img
             src={currentSlide.img}
             alt={currentSlide.title}
-            className="w-full h-[400px] md:h-[500px] object-cover rounded-2xl shadow-lg"
+            className="w-full  object-cover rounded-2xl shadow-lg"
           />
         </div>
       </div>

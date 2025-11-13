@@ -18,22 +18,19 @@ const FeaturedArtworks = () => {
       .catch((err) => console.error(err));
   }, []);
 
-  if (loading) {
-    return (
-      <div className="flex justify-center items-center min-h-40">
-        <Loader />
-      </div>
-    );
-  }
+  if (loading) return <Loader />
 
   return (
-    <div className="py-16">
+    <div className="py-16 mt-10">
+      <h1 className="text-4xl font-bold text-center text-indigo-600">Featured Artworks</h1>
       <div
         className="container mx-auto 
                       grid gap-8 p-5 
                       sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 
-                      justify-items-center"
+                      justify-items-center mt-10"
+
       >
+
         {artworks.map((item) => (
           <div
             key={item._id}
@@ -56,13 +53,12 @@ const FeaturedArtworks = () => {
 
               {/* Hover Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent 
-                              opacity-0 group-hover:opacity-70 transition-opacity duration-700 flex items-end justify-center pb-6">
-                <Link
-                  to={`/artwork-details/${item._id}`}
-                  className="text-white text-sm bg-indigo-600/80 px-4 py-2 rounded-full shadow hover:bg-indigo-700 transition"
+                              opacity-0 group-hover:opacity-90 transition-opacity duration-700 flex items-end justify-center pb-1">
+                <p
+                  className="text-white italic text-xs bg-indigo-600/80 px-3 py-1 rounded-full shadow hover:bg-indigo-700 transition"
                 >
-                  View Details
-                </Link>
+                  by_{item.userName}
+                </p>
               </div>
 
               {/* Badges */}
@@ -90,12 +86,6 @@ const FeaturedArtworks = () => {
                 {item.title}
               </h3>
 
-              {/* Artist Info */}
-              {item.userName && (
-                <p className="text-sm text-gray-500 italic">
-                  by <span className="font-medium text-indigo-600">{item.userName}</span>
-                </p>
-              )}
 
               {/* Description (short preview) */}
               {item.description && (
@@ -108,28 +98,31 @@ const FeaturedArtworks = () => {
               <div className="flex items-center justify-between text-sm text-gray-700 mt-3">
                 <p className="font-semibold text-indigo-700 text-lg">${item.price}</p>
                 <span
-                  className={`px-3 py-1 rounded-full text-xs font-medium ${
-                    item.visibility === "Public"
-                      ? "bg-green-100 text-green-600"
-                      : "bg-yellow-100 text-yellow-600"
-                  }`}
+                  className={`px-3 py-1 rounded-full text-xs font-medium ${item.visibility === "Public"
+                    ? "bg-green-100 text-green-600"
+                    : "bg-yellow-100 text-yellow-600"
+                    }`}
                 >
                   {item.visibility || "Unknown"}
                 </span>
               </div>
 
+
+
+
               {/* View Details Button */}
-              <Link
-                to={`/artwork-details/${item._id}`}
-                className="group btn btn-st flex items-center justify-center gap-2 hover:scale-105 transition-all duration-500 w-full text-white overflow-hidden mt-3"
-              >
-                <span className="transition-all duration-700 ease-in-out group-hover:translate-x-4">
-                  View Details
-                </span>
-                <ArrowRight className="transition-all duration-700 ease-in-out group-hover:-translate-x-30" />
-              </Link>
+
+                <Link
+                  to={`/artwork-details/${item._id}`}
+                  className="group btn btn-st flex items-center justify-center gap-2 hover:scale-105 transition-all duration-500 w-full text-white overflow-hidden mt-3"
+                >
+                  <span className="transition-all duration-700 ease-in-out group-hover:translate-x-4">
+                    View Details
+                  </span>
+                  <ArrowRight className="transition-all duration-700 ease-in-out group-hover:-translate-x-30" />
+                </Link>
+              </div>
             </div>
-          </div>
         ))}
       </div>
     </div>

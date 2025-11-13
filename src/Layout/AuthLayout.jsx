@@ -6,7 +6,7 @@ import Footer from '../Component/Shared/Footer';
 const AuthLayout = () => {
     return (
         <div className='bg-gradient-to-r from-gray-50 to-gray-100'>
-            <header>
+            <header className='sticky z-50 h-fit top-0'>
                 <Navbar></Navbar>
             </header>
             <main>

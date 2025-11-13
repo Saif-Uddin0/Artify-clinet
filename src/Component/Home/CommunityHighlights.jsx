@@ -46,18 +46,12 @@ const CommunityHighlights = () => {
           🌟Community Highlights
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 ">
           {highlights.map((item, index) => (
-            <motion.div
-              key={index}
-              className="bg-white mt-8 rounded-xl overflow-hidden shadow-md cursor-pointer transition-all "
-              whileHover={{
-                scale: 1.03,
-                boxShadow: "0 15px 30px rgba(0,0,0,0.2)",
-              }}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.10 }}
+            <div
+              
+              className="bg-white mt-8 rounded-xl overflow-hidden shadow-md cursor-pointer transition-all hover:transform hover:scale-107 duration-500"
+
             >
               {/* Image Section */}
               <img
@@ -93,7 +87,7 @@ const CommunityHighlights = () => {
                   </span>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

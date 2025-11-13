@@ -11,7 +11,6 @@ import Swal from "sweetalert2";
 const ArtworkDetails = () => {
     const { user } = use(AuthContext);
     const [liked, setLiked] = useState(false);
-    const [likeCount, setLikeCount] = useState(0);
     const [disable, setDisable] = useState(false);
     const [loading, setLoading] = useState(false);
     const data = useLoaderData();
@@ -25,7 +24,8 @@ const ArtworkDetails = () => {
         userName,
         createdAt,
         userEmail,
-        _id
+        _id,
+        likes
     } = data;
 
 
@@ -46,7 +46,7 @@ const ArtworkDetails = () => {
 
                 })
                 .finally(() => {
-                    setLoading(false); // ✅ সব ক্ষেত্রেই loader বন্ধ হবে
+                    setLoading(false); 
                 });
         }
 
@@ -57,10 +57,44 @@ const ArtworkDetails = () => {
         return <div><Loader></Loader></div>
     }
 
-    const handleLike = () => {
-        setLiked(!liked);
-        setLikeCount((prev) => (liked ? prev - 1 : prev + 1));
+
+
+
+
+
+
+
+
+       const handleLike = (id) => {
+        console.log(id);
+        fetch(`http://localhost:3000/artwork/${id}/like`, {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ userEmail: user?.email })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if(data.success == "true"){
+                    toast.success("You liked this artwork!");
+                    setLiked(true); 
+                }
+                else{
+                    toast.error(data.message);
+                }
+            })
+            .catch(err => toast.error(err.message));
     };
+
+
+
+
+
+
+
+
+
+
 
     const handleFavorite = (data) => {
         // console.log(data);
@@ -164,7 +198,7 @@ const ArtworkDetails = () => {
                     <div className="flex items-center justify-center gap-4 mt-6">
                         <motion.button
                             whileTap={{ scale: 1.2 }}
-                            onClick={handleLike}
+                            onClick={()=>handleLike(_id)}
                             className="flex items-center gap-2 px-5 py-2 rounded-full bg-pink-100 hover:bg-pink-200 transition-all"
                         >
                             {liked ? (
@@ -172,9 +206,8 @@ const ArtworkDetails = () => {
                             ) : (
                                 <FaRegHeart className="text-gray-400" />
                             )}
-                            <span className="font-medium text-gray-700">
-                                {likeCount} {likeCount === 1 ? "Like" : "Likes"}
-                            </span>
+                            <span className="">{likes}</span>
+                            
                         </motion.button>
 
                         <motion.button

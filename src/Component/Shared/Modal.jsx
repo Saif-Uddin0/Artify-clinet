@@ -4,7 +4,7 @@ import { AuthContext } from '../../Provider/AuthContext';
 
 const Modal = ({ art, handleUpdate }) => {
     return (
-        <div>
+        <div className=''>
             <form onSubmit={handleUpdate} className="">
                 <fieldset className='fieldset space-y-3'>
                     <div className="grid sm:grid-cols-2 gap-3">
