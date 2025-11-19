@@ -1,5 +1,6 @@
 # 🎨 Artify — Discover & Share Creative Artworks
-https://github.com/Saif-Uddin0/Artify-clinet/blob/main/artify.jpg?raw=true
+<img src="https://github.com/Saif-Uddin0/Artify-clinet/blob/main/artify.jpg?raw=true" />
+
 
 **Artify** is a modern web platform that allows artists to upload, explore, and connect through digital artworks.  
 Users can browse various categories, like their favorite pieces, and build a personalized collection of favorites.
