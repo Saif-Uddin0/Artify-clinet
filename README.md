@@ -27,7 +27,7 @@ Type	Link
 — Smooth UI interactions using *Framer Motion* and modern gradient styling. — Manage uploaded artworks and favourites from a personalized dashboard.
 
 ---
-
+-----------
 🛠️ Tech Stack
 Frontend
 
@@ -42,7 +42,8 @@ Firebase Auth
 Framer Motion
 
 Swiper.js
-
+--------------
+-------------
 Backend
 
 Node.js
@@ -56,14 +57,15 @@ Hosting
 Firebase Hosting (Client)
 
 Vercel / Render (if different, tell me)
-
+--------------
 ✨ Core Features
 🔐 Authentication
 
 User Login / Register
 
 Firebase Authentication
-
+----------------
+----------------
 🎨 Artwork Management
 
 Add new artworks
@@ -71,7 +73,8 @@ Add new artworks
 View all artworks
 
 Each artwork includes title, image, category, rating, description
-
+---------
+------------
 ❤️ Engagement System
 
 Like / Unlike artworks
@@ -95,7 +98,8 @@ Fully mobile-friendly
 Smooth animations using Framer Motion
 
 Slider/Carousel using Swiper
-
+--------
+------
 
 
 📁 Project Structure (Client)
@@ -107,7 +111,7 @@ src/
 │── Provider/AuthContext.jsx
 │── main.jsx
 │── App.jsx
-
+----------
 
 
 
