@@ -115,16 +115,16 @@ src/
 🛠️ Environment Setup
 --------
 ----------
-Frontend
-git clone
-npm install
-npm run dev
+##Frontend
+-git clone
+-npm install
+-npm run dev
 -------
 ----------
-Backend
-git clone
-npm install
-nodemon index.js
+##Backend
+-git clone
+-npm install
+-nodemon index.js
 --------------------
 
 
