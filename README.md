@@ -113,11 +113,14 @@ src/
 │── App.jsx
 ----------
 🛠️ Environment Setup
+--------
+----------
 Frontend
 git clone
 npm install
 npm run dev
----------------
+-------
+----------
 Backend
 git clone
 npm install
